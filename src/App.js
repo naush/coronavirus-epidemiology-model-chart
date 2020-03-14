@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,6 +12,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import Container from '@material-ui/core/Container';
+
+import TextField from '@material-ui/core/TextField';
 
 import purple from '@material-ui/core/colors/purple';
 import grey from '@material-ui/core/colors/grey';
@@ -46,16 +48,41 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function TextFieldWithLongLabel(props) {
+  const {
+    label,
+    value,
+    changeHandler
+  } = props;
+
+  return (
+    <React.Fragment>
+      <Typography variant='overline'>
+        {label}
+      </Typography>
+      <TextField
+        type="number"
+        defaultValue={value}
+        onChange={changeHandler}
+        InputLabelProps={{ shrink: true, }}
+        fullWidth
+      />
+    </React.Fragment>
+  );
+}
+
 function App() {
   const classes = useStyles();
-  const options = {
+
+  const [options, setOptions] = useState({
     numberOfDaysPerDoubling: 7,
     numberOfDaysFromInfectionToDeath: 20,
     mortalityRate: 0.015,
     numberOfDaysFromInfectionToHospitalization: 12,
     hopistalizationRate: 0.2,
     numberOfDaysFromInjectionToOutOfHospital: 40,
-  };
+  });
+
   const model = new Model(options);
   const days = Array.from(new Array(180), (_, day) => day + 1).filter((day) => day % 7 === 0);
 
@@ -70,6 +97,13 @@ function App() {
       numberInHospitalAtTheTime: dataset.numberInHospitalAtTheTime.toFixed(0),
     };
   });
+
+  const changeHandler = (attribute) => (e) => {
+    setOptions({
+      ...options,
+      [attribute]: Number(e.target.value),
+    });
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -93,7 +127,33 @@ function App() {
         >
           <Grid container spacing={0}>
             <Grid item xs={4} sm={2}>
-              <Paper elevation={0} className={classes.paper}>Settings</Paper>
+              <Paper elevation={0} className={classes.paper}>
+                <TextFieldWithLongLabel
+                  label='Number of days per doubling'
+                  value={options.numberOfDaysPerDoubling}
+                  changeHandler={changeHandler('numberOfDaysPerDoubling')}
+                />
+                <TextFieldWithLongLabel
+                  label='Number of days from infection to death'
+                  value={options.numberOfDaysFromInfectionToDeath}
+                  changeHandler={changeHandler('numberOfDaysFromInfectionToDeath')}
+                />
+                <TextFieldWithLongLabel
+                  label='Mortality rate'
+                  value={options.mortalityRate}
+                  changeHandler={changeHandler('mortalityRate')}
+                />
+                <TextFieldWithLongLabel
+                  label='Number of days from infection to hospitalization'
+                  value={options.numberOfDaysFromInfectionToHospitalization}
+                  changeHandler={changeHandler('numberOfDaysFromInfectionToHospitalization')}
+                />
+                <TextFieldWithLongLabel
+                  label='Number of days from infection to out of hospital (average death or recovery)'
+                  value={options.numberOfDaysFromInjectionToOutOfHospital}
+                  changeHandler={changeHandler('numberOfDaysFromInjectionToOutOfHospital')}
+                />
+              </Paper>
             </Grid>
             <Grid item xs={20} sm={10}>
               <Paper elevation={0} className={classes.paper}>
