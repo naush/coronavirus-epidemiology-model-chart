@@ -5,6 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -39,6 +40,11 @@ function Navigator(props) {
       >
         <MenuItem onClick={handleClose('/')}>Projection</MenuItem>
         <MenuItem onClick={handleClose('/safe-group-size')}>Safe Group Size</MenuItem>
+        <MenuItem>
+          <Link target="_blank" href="https://www.sleepphones.com/Coronavirus-predictions-mortality-rate">
+            Dr. Wei-Shin Lai
+          </Link>
+        </MenuItem>
       </Menu>
     </IconButton>
   );

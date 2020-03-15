@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTheme } from '@material-ui/core/styles';
 
 import {
   LineChart,
@@ -11,9 +12,9 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-
 function Chart(props) {
-  const { data, theme } = props;
+  const { data } = props;
+  const theme = useTheme();
 
   return (
     <ResponsiveContainer>
@@ -26,9 +27,9 @@ function Chart(props) {
         <Tooltip labelFormatter={(day) => `Day ${day}`} />
         <Legend />
         <Line type="monotone" dataKey="numberOfCases" name="Number of Cases" stroke={theme.palette.primary.main} activeDot={{ r: 8 }} />
-        <Line type="monotone" dataKey="numberOfDeaths" name="Number of Deaths" stroke={theme.palette.secondary.main} />
-        <Line type="monotone" dataKey="numberHospitalized" name="Number Hospitalized" stroke={theme.palette.secondary.main} />
-        <Line type="monotone" dataKey="numberInHospitalAtTheTime" name="Number in hospital at the time" stroke={theme.palette.secondary.main} />
+        <Line type="monotone" dataKey="numberOfDeaths" name="Number of Deaths" stroke={theme.palette.text.secondary} />
+        <Line type="monotone" dataKey="numberHospitalized" name="Number Hospitalized" stroke={theme.palette.tertiary.main} />
+        <Line type="monotone" dataKey="numberInHospitalAtTheTime" name="Number in hospital at the time" stroke={theme.palette.quarternary.main} />
       </LineChart>
     </ResponsiveContainer>
   );

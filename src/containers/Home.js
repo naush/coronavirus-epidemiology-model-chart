@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -10,7 +10,6 @@ import Container from '@material-ui/core/Container';
 
 import TextFieldWithLongLabel from './../components/TextFieldWithLongLabel';
 import Chart from './../components/Chart';
-import Footer from './../components/Footer';
 
 import { Model } from 'coronavirus-epidemiology-model';
 
@@ -35,7 +34,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Home(props) {
-  const theme = useTheme();
   const classes = useStyles();
 
   const [options, setOptions] = useState({
@@ -102,14 +100,12 @@ function Home(props) {
               value={options.numberOfDaysFromInjectionToOutOfHospital}
               changeHandler={changeHandler('numberOfDaysFromInjectionToOutOfHospital')}
             />
-            <Footer />
           </Paper>
         </Grid>
         <Grid item sm={9}>
           <Paper elevation={0} className={clsx(classes.paper, classes.chart)}>
             <Chart
               data={data}
-              theme={theme}
             />
           </Paper>
         </Grid>

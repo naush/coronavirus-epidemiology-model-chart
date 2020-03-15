@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 import TextFieldWithLongLabel from './../components/TextFieldWithLongLabel';
-import Footer from './../components/Footer';
 
 import { SafeGroupSize as Calculator } from 'coronavirus-epidemiology-model';
 
@@ -56,7 +55,6 @@ function SafeGroupSize(props) {
               value={options.estimatedNumberOfCases}
               changeHandler={changeHandler('estimatedNumberOfCases')}
             />
-            <Footer />
           </Paper>
         </Grid>
         <Grid item sm={9} className={classes.item}>
@@ -66,6 +64,9 @@ function SafeGroupSize(props) {
             </Typography>
             <Typography variant="h1" color="primary">
               {Calculator.calculate(options).toFixed(0)}
+            </Typography>
+            <Typography variant="subtitle2" color="secondary">
+              * 95% chance you will not encounter someone with coronavirus.
             </Typography>
           </Paper>
         </Grid>

@@ -16,10 +16,19 @@ import {
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#9278D1',
+      main: '#597B80',
     },
     secondary: {
-      main: '#428bca',
+      main: '#364A4D',
+    },
+    tertiary: {
+      main: '#808080',
+    },
+    quarternary: {
+      main: '#CCCCC0',
+    },
+    text: {
+      secondary: '#333333',
     },
   },
 });
