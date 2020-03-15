@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4fdade8d91a3706866ccf39a8190235e",
+    "revision": "2fb2a944b04de86c85b418736cf61f24",
     "url": "/coronavirus-epidemiology-model-chart/index.html"
   },
   {
