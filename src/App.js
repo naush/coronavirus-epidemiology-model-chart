@@ -30,6 +30,9 @@ const theme = createMuiTheme({
     quinary: {
       main: '#F85353',
     },
+    senary: {
+      main: '#ECEFF1',
+    },
     text: {
       secondary: '#333333',
     },

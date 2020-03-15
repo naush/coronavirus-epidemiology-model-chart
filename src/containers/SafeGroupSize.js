@@ -5,10 +5,9 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-
 import Container from '@material-ui/core/Container';
-
 import TextFieldWithLongLabel from './../components/TextFieldWithLongLabel';
+import clsx from  'clsx';
 
 import { SafeGroupSize as Calculator } from 'coronavirus-epidemiology-model';
 
@@ -38,6 +37,10 @@ const useStyles = makeStyles(theme => ({
   subtitle: {
     color: theme.palette.quinary.main,
   },
+  control: {
+    background: theme.palette.senary.main,
+    margin: theme.spacing(2),
+  },
 }));
 
 function SafeGroupSize(props) {
@@ -62,7 +65,7 @@ function SafeGroupSize(props) {
     >
       <Grid container spacing={0}>
         <Grid item sm={3} className={classes.item}>
-          <Paper elevation={0} className={classes.paper}>
+          <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
             <TextFieldWithLongLabel
               label='Population in Metropolitan Area'
               value={options.populationInMetropolitanArea}

@@ -35,6 +35,10 @@ const useStyles = makeStyles(theme => ({
   radio: {
     color: theme.palette.quinary.main,
   },
+  control: {
+    background: theme.palette.senary.main,
+    margin: theme.spacing(2),
+  },
 }));
 
 function Home(props) {
@@ -79,7 +83,7 @@ function Home(props) {
     >
       <Grid container spacing={0}>
         <Grid item sm={3}>
-          <Paper elevation={0} className={classes.paper}>
+          <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
             <TextFieldWithLongLabel
               label='Number of days per doubling'
               value={options.numberOfDaysPerDoubling}

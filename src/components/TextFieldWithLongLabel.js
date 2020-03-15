@@ -10,8 +10,11 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'left',
 
     '&:first-child': {
-      marginTop: 0,
+      padding: theme.spacing(0, 0, 1),
     },
+  },
+  field: {
+    background: '#fff',
   },
 }));
 
@@ -33,6 +36,7 @@ function TextFieldWithLongLabel(props) {
         defaultValue={value}
         onChange={changeHandler}
         InputLabelProps={{ shrink: true, }}
+        className={classes.field}
         variant="outlined"
         fullWidth
       />
