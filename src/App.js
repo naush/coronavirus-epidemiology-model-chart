@@ -10,13 +10,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 import Container from '@material-ui/core/Container';
 
 import TextField from '@material-ui/core/TextField';
 
-import purple from '@material-ui/core/colors/purple';
-import grey from '@material-ui/core/colors/grey';
+import Link from '@material-ui/core/Link';
 
 import { Model } from 'coronavirus-epidemiology-model';
 
@@ -26,8 +26,12 @@ import {
 
 const theme = createMuiTheme({
   palette: {
-    primary: purple,
-    secondary: grey,
+    primary: {
+      main: '#9278D1',
+    },
+    secondary: {
+      main: '#428bca',
+    },
   },
 });
 
@@ -45,6 +49,9 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+  },
+  footer: {
+    padding: theme.spacing(2, 0, 0),
   },
 }));
 
@@ -65,6 +72,7 @@ function TextFieldWithLongLabel(props) {
         defaultValue={value}
         onChange={changeHandler}
         InputLabelProps={{ shrink: true, }}
+        variant="outlined"
         fullWidth
       />
     </React.Fragment>
@@ -84,7 +92,7 @@ function App() {
   });
 
   const model = new Model(options);
-  const days = Array.from(new Array(180), (_, day) => day + 1).filter((day) => day % 7 === 0);
+  const days = Array.from(new Array(84), (_, day) => day + 1).filter((day) => day % 7 === 0);
 
   const data = days.map((day) => {
     const dataset = model.ofDay(day);
@@ -126,7 +134,7 @@ function App() {
           disableGutters={true}
         >
           <Grid container spacing={0}>
-            <Grid item xs={4} sm={2}>
+            <Grid item xs={6} sm={3}>
               <Paper elevation={0} className={classes.paper}>
                 <TextFieldWithLongLabel
                   label='Number of days per doubling'
@@ -153,18 +161,26 @@ function App() {
                   value={options.numberOfDaysFromInjectionToOutOfHospital}
                   changeHandler={changeHandler('numberOfDaysFromInjectionToOutOfHospital')}
                 />
+                <Box className={classes.footer}>
+                  <Typography>
+                    Source: <Link color="primary" target="_blank" href="https://www.sleepphones.com/Coronavirus-predictions-mortality-rate">SleepPhones</Link>.
+                  </Typography>
+                </Box>
               </Paper>
             </Grid>
-            <Grid item xs={20} sm={10}>
+            <Grid item xs={18} sm={9}>
               <Paper elevation={0} className={classes.paper}>
                 <ResponsiveContainer
-                  width='80%'
+                  width='90%'
                   height={600}
                 >
                   <LineChart
                     data={data}
                     margin={{
-                      top: 5, right: 30, left: 20, bottom: 5,
+                      top: 0,
+                      right: 0,
+                      left: 48,
+                      bottom: 0,
                     }}
                   >
                     <CartesianGrid strokeDasharray="3 3" />
@@ -172,10 +188,10 @@ function App() {
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="numberOfCases" name="Number of Cases" stroke="#8884d8" activeDot={{ r: 8 }} />
-                    <Line type="monotone" dataKey="numberOfDeaths" name="Number of Deaths" stroke="#82ca9d" />
-                    <Line type="monotone" dataKey="numberHospitalized" name="Number Hospitalized" stroke="#82ca9d" />
-                    <Line type="monotone" dataKey="numberInHospitalAtTheTime" name="Number in hospital at the time" stroke="#82ca9d" />
+                    <Line type="monotone" dataKey="numberOfCases" name="Number of Cases" stroke={theme.palette.primary.main} activeDot={{ r: 8 }} />
+                    <Line type="monotone" dataKey="numberOfDeaths" name="Number of Deaths" stroke={theme.palette.secondary.main} />
+                    <Line type="monotone" dataKey="numberHospitalized" name="Number Hospitalized" stroke={theme.palette.secondary.main} />
+                    <Line type="monotone" dataKey="numberInHospitalAtTheTime" name="Number in hospital at the time" stroke={theme.palette.secondary.main} />
                   </LineChart>
                 </ResponsiveContainer>
               </Paper>
