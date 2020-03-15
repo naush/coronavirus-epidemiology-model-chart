@@ -54,8 +54,8 @@ const useStyles = makeStyles(theme => ({
   },
   chart: {
     [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(70),
-      width: theme.spacing(140),
+      height: theme.spacing(60),
+      width: theme.spacing(120),
       margin: theme.spacing(4, 4, 0, 0),
     },
 
