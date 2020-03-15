@@ -27,7 +27,7 @@ const theme = createMuiTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
+      <Router basename={'coronavirus-epidemiology-model-chart'}>
         <Switch>
           <Route path='/safe-group-size'>
             <Main>
