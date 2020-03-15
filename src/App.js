@@ -20,6 +20,8 @@ import Link from '@material-ui/core/Link';
 
 import { Model } from 'coronavirus-epidemiology-model';
 
+import clsx from  'clsx';
+
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
@@ -49,6 +51,18 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+  },
+  chart: {
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(70),
+      width: theme.spacing(140),
+      margin: theme.spacing(4, 4, 0, 0),
+    },
+
+    [theme.breakpoints.down('sm')]: {
+      height: theme.spacing(35),
+      width: theme.spacing(35),
+    },
   },
   footer: {
     padding: theme.spacing(2, 0, 0),
@@ -134,7 +148,7 @@ function App() {
           disableGutters={true}
         >
           <Grid container spacing={0}>
-            <Grid item xs={6} sm={3}>
+            <Grid item sm={3}>
               <Paper elevation={0} className={classes.paper}>
                 <TextFieldWithLongLabel
                   label='Number of days per doubling'
@@ -168,25 +182,16 @@ function App() {
                 </Box>
               </Paper>
             </Grid>
-            <Grid item xs={18} sm={9}>
-              <Paper elevation={0} className={classes.paper}>
-                <ResponsiveContainer
-                  width='90%'
-                  height={600}
-                >
+            <Grid item sm={9}>
+              <Paper elevation={0} className={clsx(classes.paper, classes.chart)}>
+                <ResponsiveContainer>
                   <LineChart
                     data={data}
-                    margin={{
-                      top: 0,
-                      right: 0,
-                      left: 48,
-                      bottom: 0,
-                    }}
                   >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip />
+                    <Tooltip labelFormatter={(day) => `Day ${day}`} />
                     <Legend />
                     <Line type="monotone" dataKey="numberOfCases" name="Number of Cases" stroke={theme.palette.primary.main} activeDot={{ r: 8 }} />
                     <Line type="monotone" dataKey="numberOfDeaths" name="Number of Deaths" stroke={theme.palette.secondary.main} />
