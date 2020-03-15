@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
+import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -19,6 +20,23 @@ const useStyles = makeStyles(theme => ({
   },
   item: {
     width: '100%',
+  },
+  dashboard: {
+    margin: theme.spacing(2),
+  },
+  figure: {
+    [theme.breakpoints.down('sm')]: {
+      fontSize: `${theme.spacing(12)}px`,
+      lineHeight: `${theme.spacing(14)}px`,
+    },
+
+    [theme.breakpoints.up('sm')]: {
+      fontSize: `${theme.spacing(36)}px`,
+      lineHeight: `${theme.spacing(42)}px`,
+    },
+  },
+  subtitle: {
+    color: theme.palette.quinary.main,
   },
 }));
 
@@ -59,15 +77,17 @@ function SafeGroupSize(props) {
         </Grid>
         <Grid item sm={9} className={classes.item}>
           <Paper elevation={0} className={classes.paper}>
-            <Typography variant="overline">
-              The Largest Safe Group Size
-            </Typography>
-            <Typography variant="h1" color="primary">
-              {Calculator.calculate(options).toFixed(0)}
-            </Typography>
-            <Typography variant="subtitle2" color="secondary">
-              * 95% chance you will not encounter someone with coronavirus.
-            </Typography>
+            <Box className={classes.dashboard}>
+              <Typography variant="body1">
+                The Largest Safe Group Size
+              </Typography>
+              <Typography className={classes.figure} color="primary">
+                {Calculator.calculate(options).toFixed(0)}
+              </Typography>
+              <Typography variant="body1" className={classes.subtitle}>
+                * 95% chance you will not encounter someone with coronavirus.
+              </Typography>
+            </Box>
           </Paper>
         </Grid>
       </Grid>
