@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/coronavirus-epidemiology-model-chart/static/css/main.34de6062.chunk.css",
-    "main.js": "/coronavirus-epidemiology-model-chart/static/js/main.a23f397a.chunk.js",
-    "main.js.map": "/coronavirus-epidemiology-model-chart/static/js/main.a23f397a.chunk.js.map",
+    "main.js": "/coronavirus-epidemiology-model-chart/static/js/main.3782f328.chunk.js",
+    "main.js.map": "/coronavirus-epidemiology-model-chart/static/js/main.3782f328.chunk.js.map",
     "runtime-main.js": "/coronavirus-epidemiology-model-chart/static/js/runtime-main.db7d73f6.js",
     "runtime-main.js.map": "/coronavirus-epidemiology-model-chart/static/js/runtime-main.db7d73f6.js.map",
-    "static/js/2.a70b3c9b.chunk.js": "/coronavirus-epidemiology-model-chart/static/js/2.a70b3c9b.chunk.js",
-    "static/js/2.a70b3c9b.chunk.js.map": "/coronavirus-epidemiology-model-chart/static/js/2.a70b3c9b.chunk.js.map",
+    "static/js/2.f41b1b54.chunk.js": "/coronavirus-epidemiology-model-chart/static/js/2.f41b1b54.chunk.js",
+    "static/js/2.f41b1b54.chunk.js.map": "/coronavirus-epidemiology-model-chart/static/js/2.f41b1b54.chunk.js.map",
     "index.html": "/coronavirus-epidemiology-model-chart/index.html",
-    "precache-manifest.1a9e26125e4a37cb9c146ba436005d35.js": "/coronavirus-epidemiology-model-chart/precache-manifest.1a9e26125e4a37cb9c146ba436005d35.js",
+    "precache-manifest.af7b399ab597503c6d05b37d66a868c4.js": "/coronavirus-epidemiology-model-chart/precache-manifest.af7b399ab597503c6d05b37d66a868c4.js",
     "service-worker.js": "/coronavirus-epidemiology-model-chart/service-worker.js",
     "static/css/main.34de6062.chunk.css.map": "/coronavirus-epidemiology-model-chart/static/css/main.34de6062.chunk.css.map"
   }
