@@ -5,6 +5,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 
 import Main from './layouts/Main';
 import Home from './containers/Home';
+import SafeGroupSize from './containers/SafeGroupSize';
 
 import {
   BrowserRouter as Router,
@@ -28,9 +29,14 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
-          <Route>
+          <Route path='/safe-group-size'>
             <Main>
-              <Route path='/' component={Home} />
+              <SafeGroupSize />
+            </Main>
+          </Route>
+          <Route path='/'>
+            <Main>
+              <Home />
             </Main>
           </Route>
         </Switch>
