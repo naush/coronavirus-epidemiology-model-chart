@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/coronavirus-epidemiology-model-chart/precache-manifest.02128f9504163e2274da407b325474bd.js"
+  "/coronavirus-epidemiology-model-chart/precache-manifest.399fdb4533deabdab640e925a888f4c6.js"
 );
 
 self.addEventListener('message', (event) => {
