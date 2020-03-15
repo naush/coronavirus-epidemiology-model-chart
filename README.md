@@ -15,6 +15,15 @@ Deploys the app to [http://naush.github.io/coronavirus-epidemiology-model-chart]
 
 Launches the test runner in the interactive watch mode.<br>
 
+## ToDo's
+
+1. Create a slider for changing date range (week, 1-month, 2-month, 3-month, 6-month)
+1. Better responsive design for mobile experience
+1. Credit Nine Trinktes.
+1. Safe group size calculator tool.
+1. Presets: city/region
+1. Fetch live data from Johns Hopkins.
+
 ## License
 
 ```
