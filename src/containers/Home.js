@@ -46,7 +46,7 @@ function Home(props) {
   });
 
   const model = new Model(options);
-  const days = Array.from(new Array(84), (_, day) => day + 1).filter((day) => day % 7 === 0);
+  const days = Array.from(new Array(84), (_, day) => day + 1).filter((day) => day === 1 || day % 7 === 0);
 
   const data = days.map((day) => {
     const dataset = model.ofDay(day);
