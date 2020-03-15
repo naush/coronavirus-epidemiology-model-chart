@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-
-import clsx from  'clsx';
-
 import Container from '@material-ui/core/Container';
-
+import Box from '@material-ui/core/Box';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 import TextFieldWithLongLabel from './../components/TextFieldWithLongLabel';
 import Chart from './../components/Chart';
+import clsx from  'clsx';
 
 import { Model } from 'coronavirus-epidemiology-model';
 
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(60),
       width: theme.spacing(120),
-      margin: theme.spacing(4, 4, 0, 0),
+      margin: theme.spacing(2, 4, 0, 0),
     },
 
     [theme.breakpoints.down('sm')]: {
@@ -31,12 +32,16 @@ const useStyles = makeStyles(theme => ({
       width: theme.spacing(35),
     },
   },
+  radio: {
+    color: theme.palette.quinary.main,
+  },
 }));
 
 function Home(props) {
   const classes = useStyles();
 
   const [options, setOptions] = useState({
+    range: 84,
     numberOfDaysPerDoubling: 7,
     numberOfDaysFromInfectionToDeath: 20,
     mortalityRate: 0.015,
@@ -46,7 +51,7 @@ function Home(props) {
   });
 
   const model = new Model(options);
-  const days = Array.from(new Array(84), (_, day) => day + 1).filter((day) => day === 1 || day % 7 === 0);
+  const days = Array.from(new Array(options.range), (_, day) => day + 1).filter((day) => day === 1 || day % 7 === 0);
 
   const data = days.map((day) => {
     const dataset = model.ofDay(day);
@@ -104,6 +109,36 @@ function Home(props) {
         </Grid>
         <Grid item sm={9}>
           <Paper elevation={0} className={clsx(classes.paper, classes.chart)}>
+            <Box>
+              <FormControl>
+                <RadioGroup value={options.range} onChange={changeHandler('range')} row>
+                  <FormControlLabel
+                    value={7}
+                    control={<Radio color='default' classes={{checked: classes.radio}} />}
+                    label='1w'
+                    labelPlacement='end'
+                  />
+                  <FormControlLabel
+                    value={28}
+                    control={<Radio color='default' classes={{checked: classes.radio}} />}
+                    label='1m'
+                    labelPlacement='end'
+                  />
+                  <FormControlLabel
+                    value={84}
+                    control={<Radio color='default' classes={{checked: classes.radio}} />}
+                    label='3m'
+                    labelPlacement='end'
+                  />
+                  <FormControlLabel
+                    value={168}
+                    control={<Radio color='default' classes={{checked: classes.radio}} />}
+                    label='6m'
+                    labelPlacement='end'
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Box>
             <Chart
               data={data}
             />

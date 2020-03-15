@@ -29,7 +29,7 @@ function Chart(props) {
         <Line type="monotone" dataKey="numberOfCases" name="Number of Cases" stroke={theme.palette.primary.main} activeDot={{ r: 8 }} />
         <Line type="monotone" dataKey="numberOfDeaths" name="Number of Deaths" stroke={theme.palette.text.secondary} />
         <Line type="monotone" dataKey="numberHospitalized" name="Number Hospitalized" stroke={theme.palette.tertiary.main} />
-        <Line type="monotone" dataKey="numberInHospitalAtTheTime" name="Number in hospital at the time" stroke={theme.palette.quarternary.main} />
+        <Line type="monotone" dataKey="numberInHospitalAtTheTime" name="Number in hospital at the time" stroke={theme.palette.quaternary.main} />
       </LineChart>
     </ResponsiveContainer>
   );

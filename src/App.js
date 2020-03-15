@@ -24,8 +24,11 @@ const theme = createMuiTheme({
     tertiary: {
       main: '#808080',
     },
-    quarternary: {
+    quaternary: {
       main: '#CCCCC0',
+    },
+    quinary: {
+      main: '#F85353',
     },
     text: {
       secondary: '#333333',
