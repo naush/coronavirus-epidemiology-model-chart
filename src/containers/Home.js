@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -13,7 +13,6 @@ import Chart from './../components/Chart';
 import Footer from './../components/Footer';
 
 import { Model } from 'coronavirus-epidemiology-model';
-
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -36,10 +35,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Home(props) {
-  const {
-    theme,
-  } = props;
-
+  const theme = useTheme();
   const classes = useStyles();
 
   const [options, setOptions] = useState({
