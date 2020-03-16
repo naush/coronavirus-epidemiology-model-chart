@@ -24,12 +24,12 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(60),
       width: theme.spacing(120),
-      margin: theme.spacing(2, 4, 0, 0),
+      margin: theme.spacing(2),
     },
 
     [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(35),
-      width: theme.spacing(35),
+      height: theme.spacing(40),
+      width: theme.spacing(40),
     },
   },
   radio: {
@@ -38,6 +38,9 @@ const useStyles = makeStyles(theme => ({
   control: {
     background: theme.palette.senary.main,
     margin: theme.spacing(2),
+  },
+  range: {
+    margin: theme.spacing(0, 0, 1),
   },
 }));
 
@@ -114,7 +117,7 @@ function Home(props) {
         <Grid item sm={9}>
           <Paper elevation={0} className={clsx(classes.paper, classes.chart)}>
             <Box>
-              <FormControl>
+              <FormControl className={classes.range}>
                 <RadioGroup value={options.range} onChange={changeHandler('range')} row>
                   <FormControlLabel
                     value={7}
