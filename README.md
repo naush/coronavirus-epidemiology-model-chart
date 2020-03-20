@@ -24,6 +24,23 @@ Launches the test runner in the interactive watch mode.<br>
 1. Presets: city/region.
 1. Fetch live data from Johns Hopkins.
 
+## Resources
+
+1. https://naush.github.io/coronavirus-epidemiology-model-chart/
+1. https://co.vid19.sg/dashboard
+1. https://covidout.in/
+1. https://sites.google.com/cdc.gov.tw/2019ncov/taiwan
+1. https://kiang.github.io/covid19-tw/en/
+1. https://stopcovid19.hokkaido.dev/
+1. https://coronavirus.thebaselab.com/
+1. https://www.state.nj.us/health/cd/topics/covid2019_dashboard.shtml
+1. https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html
+1. https://ncov2019.live/data
+1. https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/
+1. https://stopcovid19.pichuchen.tw/en/
+1. Data: https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series
+1. API: https://documenter.getpostman.com/view/1223095/SzS4S7kd?version=latest
+
 ## License
 
 ```

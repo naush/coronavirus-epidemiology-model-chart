@@ -14,6 +14,7 @@ import clsx from  'clsx';
 
 import { Model } from 'coronavirus-epidemiology-model';
 
+
 const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(2),

@@ -24,7 +24,7 @@ function Main(props) {
         <Toolbar>
           <Navigator />
           <Typography variant="h6" className={classes.title}>
-            Coronavirus Epidemiology Model
+            Coronavirus Utilities
           </Typography>
         </Toolbar>
       </AppBar>
