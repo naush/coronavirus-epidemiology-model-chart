@@ -11,6 +11,10 @@ import clsx from  'clsx';
 
 import { SafeGroupSize as Calculator } from 'coronavirus-epidemiology-model';
 
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import cities100000 from './../assets/cities100000.json';
+
 const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(2),
@@ -41,13 +45,23 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.senary.main,
     margin: theme.spacing(2),
   },
+  label: {
+    fontWeight: 500,
+    padding: theme.spacing(2, 0, 1),
+    textAlign: 'left',
+
+    '&:first-child': {
+      padding: theme.spacing(0, 0, 1),
+    },
+  },
 }));
 
 function SafeGroupSize(props) {
   const classes = useStyles();
+  const defaultCityPopulation = cities100000.find((city) => city.name === 'New York City').population;
 
   const [options, setOptions] = useState({
-    populationInMetropolitanArea: 300000,
+    populationInMetropolitanArea: defaultCityPopulation,
     estimatedNumberOfCases: 35,
   });
 
@@ -58,6 +72,15 @@ function SafeGroupSize(props) {
     });
   }
 
+  const onChangeCity = (e, city) => {
+    if (city) {
+      setOptions({
+        ...options,
+        'populationInMetropolitanArea': city.population,
+      });
+    }
+  }
+
   return (
     <Container
       maxWidth={false}
@@ -66,10 +89,19 @@ function SafeGroupSize(props) {
       <Grid container spacing={0}>
         <Grid item sm={3} className={classes.item}>
           <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
-            <TextFieldWithLongLabel
-              label='Population in Metropolitan Area'
-              value={options.populationInMetropolitanArea}
-              changeHandler={changeHandler('populationInMetropolitanArea')}
+            <Typography variant='body1' className={classes.label}>
+              Metropolitan Area
+            </Typography>
+            <Autocomplete
+              options={cities100000}
+              getOptionLabel={option => option.name}
+              style={{ width: 300 }}
+              renderInput={params => {
+                return (
+                  <TextField {...params} placeholder='New York City' variant="outlined" />
+                );
+              }}
+              onChange={onChangeCity}
             />
             <TextFieldWithLongLabel
               label='Estimated Number of Cases'
