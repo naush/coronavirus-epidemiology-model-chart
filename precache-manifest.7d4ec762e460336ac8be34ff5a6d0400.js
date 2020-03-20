@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d95ac02a7ee664405f8c59f9d2578ea8",
+    "revision": "5f80b40107fb147e4da598825fb75f8d",
     "url": "/coronavirus-epidemiology-model-chart/index.html"
   },
   {
-    "revision": "c6b5517a35abbf9e536c",
+    "revision": "d3948c6a8ff2ff92ccda",
     "url": "/coronavirus-epidemiology-model-chart/static/css/main.34de6062.chunk.css"
   },
   {
-    "revision": "e140fef7763cb78cba75",
-    "url": "/coronavirus-epidemiology-model-chart/static/js/2.8e3160d6.chunk.js"
+    "revision": "9cf028a0fa8d9a809311",
+    "url": "/coronavirus-epidemiology-model-chart/static/js/2.d329bb8c.chunk.js"
   },
   {
-    "revision": "c6b5517a35abbf9e536c",
-    "url": "/coronavirus-epidemiology-model-chart/static/js/main.96008ce3.chunk.js"
+    "revision": "d3948c6a8ff2ff92ccda",
+    "url": "/coronavirus-epidemiology-model-chart/static/js/main.8d254799.chunk.js"
   },
   {
     "revision": "006a294257fa73b7a4b1",
