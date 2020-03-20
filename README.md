@@ -9,22 +9,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### `npm run deploy`
 
-Deploys the app to [http://naush.github.io/coronavirus-epidemiology-model-chart](http://naush.github.io/coronavirus-epidemiology-model-chart).
+`git push origin master` to [heroku](https://coronavirus-utils.herokuapp.com/).
 
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
 
-## ToDo's
-
-1. Create a slider for changing date range (week, 1-month, 2-month, 3-month, 6-month).
-1. Better responsive design for mobile experience.
-1. Credit Nine Trinktes.
-1. Safe group size calculator tool.
-1. Presets: city/region.
-1. Fetch live data from Johns Hopkins.
-
-## Resources
+## References
 
 1. https://naush.github.io/coronavirus-epidemiology-model-chart/
 1. https://co.vid19.sg/dashboard
@@ -38,8 +29,8 @@ Launches the test runner in the interactive watch mode.<br>
 1. https://ncov2019.live/data
 1. https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/
 1. https://stopcovid19.pichuchen.tw/en/
-1. Data: https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series
-1. API: https://documenter.getpostman.com/view/1223095/SzS4S7kd?version=latest
+1. https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series
+1. https://documenter.getpostman.com/view/1223095/SzS4S7kd?version=latest
 
 ## License
 
