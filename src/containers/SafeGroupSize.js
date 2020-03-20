@@ -62,7 +62,7 @@ function SafeGroupSize(props) {
 
   const [options, setOptions] = useState({
     populationInMetropolitanArea: defaultCityPopulation,
-    estimatedNumberOfCases: 35,
+    estimatedNumberOfCases: 3000,
   });
 
   const changeHandler = (attribute) => (e) => {
