@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { ReactComponent as Grains } from './../assets/images/grains.svg';
+import { ReactComponent as Protein } from './../assets/images/protein.svg';
+import { ReactComponent as Vegetables } from './../assets/images/vegetables.svg';
+import { ReactComponent as Fruits } from './../assets/images/fruits.svg';
+import { ReactComponent as Dairy } from './../assets/images/dairy.svg';
+import { ReactComponent as Oils } from './../assets/images/oils.svg';
 
+import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -40,9 +47,18 @@ const useStyles = makeStyles(theme => ({
     border: `1px ${theme.palette.senary.main} solid`,
     margin: theme.spacing(2),
     padding: theme.spacing(2),
+    position: 'relative',
   },
   categoryLabel: {
     textTransform: 'capitalize',
+    textDecoration: 'underline',
+  },
+  categoryIcon: {
+    width: theme.spacing(8),
+    height: theme.spacing(8),
+    position: 'absolute',
+    bottom: theme.spacing(1),
+    right: theme.spacing(1),
   },
 }));
 
@@ -85,6 +101,22 @@ function EmergencyFoodGuide(props) {
     {name: 'oils', quantity: options.oils},
   ];
   const categories = inventoryDays.calculate(stock, people);
+  const icons = {
+    'grains': Grains,
+    'protein': Protein,
+    'vegetables': Vegetables,
+    'fruits': Fruits,
+    'dairy': Dairy,
+    'oils': Oils,
+  };
+  const links = {
+    'grains': 'https://www.choosemyplate.gov/eathealthy/grains',
+    'protein': 'https://www.choosemyplate.gov/eathealthy/protein-foods',
+    'vegetables': 'https://www.choosemyplate.gov/eathealthy/vegetables',
+    'fruits': 'https://www.choosemyplate.gov/eathealthy/fruits',
+    'dairy': 'https://www.choosemyplate.gov/eathealthy/dairy',
+    'oils': 'https://www.choosemyplate.gov/eathealthy/oils',
+  };
 
   return (
     <Container
@@ -140,26 +172,43 @@ function EmergencyFoodGuide(props) {
             />
           </Paper>
         </Grid>
-        <Grid item sm={9} className={classes.item} spacing={3}>
+        <Grid item sm={9} className={classes.item}>
           <Paper elevation={0} className={classes.paper}>
             <Grid container>
               {
                 categories.map((category) => {
-                  const fontSize = theme.spacing(36);
-                  const lineHeight = theme.spacing(42);
-                  const numberOfDigits = category.days.toString().length;
+                  const fontSize = theme.spacing(24);
+                  const lineHeight = theme.spacing(32);
+                  const days = category.days.toFixed(0);
+                  const numberOfDigits = days.toString().length;
+                  const Icon = icons[category.name];
+                  const link = links[category.name];
+                  var color = theme.palette.primary.main;
+
+                  if (days <= 0) {
+                    color = theme.palette.senary.main;
+                  } else if (days <= 3) {
+                    color = theme.palette.primary.light;
+                  }
 
                   return (
-                    <Grid className={classes.category} sm={3} xs={10} key={category.name}>
+                    <Grid item className={classes.category} sm={3} xs={10} key={category.name}>
                       <Typography className={classes.categoryLabel} variant="h6">
-                        {category.name}
+                        <Link target='_blank' href={link}>
+                          {category.name}
+                        </Link>
                       </Typography>
                       <Typography style={{
+                        color: color,
                         fontSize: `${fontSize / numberOfDigits}px`,
                         lineHeight: `${lineHeight}px`,
-                      }} color="primary">
-                        {category.days}
+                      }}>
+                        {days}
                       </Typography>
+                      <Typography className={classes.categoryUnit} variant="h6">
+                        Days Left
+                      </Typography>
+                      <Icon className={classes.categoryIcon} />
                     </Grid>
                   );
                 })
