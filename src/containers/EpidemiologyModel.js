@@ -8,7 +8,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import TextFieldWithLongLabel from './../components/TextFieldWithLongLabel';
+import NumberField from './../components/NumberField';
 import Chart from './../components/Chart';
 import clsx from  'clsx';
 
@@ -88,27 +88,27 @@ function Home(props) {
       <Grid container spacing={0}>
         <Grid item sm={3}>
           <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
-            <TextFieldWithLongLabel
+            <NumberField
               label='Number of days per doubling'
               value={options.numberOfDaysPerDoubling}
               changeHandler={changeHandler('numberOfDaysPerDoubling')}
             />
-            <TextFieldWithLongLabel
+            <NumberField
               label='Number of days from infection to death'
               value={options.numberOfDaysFromInfectionToDeath}
               changeHandler={changeHandler('numberOfDaysFromInfectionToDeath')}
             />
-            <TextFieldWithLongLabel
+            <NumberField
               label='Mortality rate'
               value={options.mortalityRate}
               changeHandler={changeHandler('mortalityRate')}
             />
-            <TextFieldWithLongLabel
+            <NumberField
               label='Number of days from infection to hospitalization'
               value={options.numberOfDaysFromInfectionToHospitalization}
               changeHandler={changeHandler('numberOfDaysFromInfectionToHospitalization')}
             />
-            <TextFieldWithLongLabel
+            <NumberField
               label='Number of days from infection to out of hospital (average death or recovery)'
               value={options.numberOfDaysFromInjectionToOutOfHospital}
               changeHandler={changeHandler('numberOfDaysFromInjectionToOutOfHospital')}

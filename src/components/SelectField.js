@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -15,33 +16,48 @@ const useStyles = makeStyles(theme => ({
   },
   field: {
     background: '#fff',
+    textAlign: 'left',
+    height: theme.spacing(5),
   },
 }));
 
-function TextFieldWithLongLabel(props) {
+function NumberField(props) {
   const classes = useStyles();
   const {
     label,
     value,
+    choices,
     changeHandler
   } = props;
+
+  const formatChange = (e) => {
+    changeHandler(e.target.value);
+  };
 
   return (
     <Fragment>
       <Typography variant='body1' className={classes.label}>
         {label}
       </Typography>
-      <TextField
-        type="number"
-        defaultValue={value}
-        onChange={changeHandler}
-        InputLabelProps={{ shrink: true, }}
+      <Select
+        value={value}
+        onChange={formatChange}
         className={classes.field}
         variant="outlined"
         fullWidth
-      />
+      >
+        {
+          choices.map((choice) => {
+            return (
+              <MenuItem value={choice} key={choice}>
+                {choice.toUpperCase()}
+              </MenuItem>
+            );
+          })
+        }
+      </Select>
     </Fragment>
   );
 }
 
-export default TextFieldWithLongLabel;
+export default NumberField;

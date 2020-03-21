@@ -4,7 +4,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
 
 import Main from './layouts/Main';
-import Home from './containers/Home';
+import EpidemiologyModel from './containers/EpidemiologyModel';
 import SafeGroupSize from './containers/SafeGroupSize';
 import EmergencyFoodGuide from './containers/EmergencyFoodGuide';
 
@@ -57,7 +57,7 @@ function App() {
           </Route>
           <Route path='/'>
             <Main>
-              <Home />
+              <EpidemiologyModel />
             </Main>
           </Route>
         </Switch>

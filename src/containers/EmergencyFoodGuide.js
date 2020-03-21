@@ -6,12 +6,16 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import TextFieldWithLongLabel from './../components/TextFieldWithLongLabel';
+import NumberField from './../components/NumberField';
+import SelectField from './../components/SelectField';
 import clsx from  'clsx';
 
-import { InventoryDays } from 'emergency-food-guide';
+import { InventoryDays, Consumption } from 'emergency-food-guide';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    height: '500px',
+  },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
@@ -52,27 +56,34 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function EmnergencyFoodGuide(props) {
+function EmergencyFoodGuide(props) {
   const classes = useStyles();
 
-  const [options, setOptions] = useState({
-    gender: 'f',
-    age: 34,
-    grains: 0,
-    protein: 0,
-    vegetables: 0,
-    fruits: 0,
-    dairy: 0,
-    oils: 0,
-  });
+  const defaultPerson = {gender: 'f', age: 34};
+  const defaultConsumption = new Consumption([defaultPerson]).ofDay(7);
+  const defaults = {
+    gender: defaultPerson.gender,
+    age: defaultPerson.age,
+    grains: defaultConsumption.find((category) => category.name === 'grains').quantity,
+    protein: defaultConsumption.find((category) => category.name === 'protein').quantity,
+    vegetables: defaultConsumption.find((category) => category.name === 'vegetables').quantity,
+    fruits: defaultConsumption.find((category) => category.name === 'fruits').quantity,
+    dairy: defaultConsumption.find((category) => category.name === 'dairy').quantity,
+    oils: defaultConsumption.find((category) => category.name === 'oils').quantity,
+  };
 
-  const changeHandler = (attribute) => (e) => {
+  const [options, setOptions] = useState(defaults);
+
+  const changeHandler = (attribute) => (value) => {
     setOptions({
       ...options,
-      [attribute]: Number(e.target.value),
+      [attribute]: value,
     });
   }
 
+  const people = [
+    {gender: options.gender, age: options.age},
+  ];
   const inventoryDays = new InventoryDays();
   const stock = [
     {name: 'grains', quantity: options.grains},
@@ -82,57 +93,56 @@ function EmnergencyFoodGuide(props) {
     {name: 'dairy', quantity: options.dairy},
     {name: 'oils', quantity: options.oils},
   ];
-  const people = [
-    {gender: options.gender, age: options.age},
-  ];
   const categories = inventoryDays.calculate(stock, people);
 
   return (
     <Container
       maxWidth={false}
       disableGutters={true}
+      className={classes.root}
     >
-      <Grid container spacing={0}>
+      <Grid container spacing={0} className={classes.root}>
         <Grid item sm={3} className={classes.item}>
           <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
-            <TextFieldWithLongLabel
+            <SelectField
               label='Your Gender'
+              choices={['f', 'm']}
               value={options.gender}
               changeHandler={changeHandler('gender')}
             />
-            <TextFieldWithLongLabel
+            <NumberField
               label='Your Age'
               value={options.age}
               changeHandler={changeHandler('age')}
             />
           </Paper>
           <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
-            <TextFieldWithLongLabel
+            <NumberField
               label='Grains (ounce)'
               value={options.grains}
               changeHandler={changeHandler('grains')}
             />
-            <TextFieldWithLongLabel
+            <NumberField
               label='Protein (ounce)'
               value={options.protein}
               changeHandler={changeHandler('protein')}
             />
-            <TextFieldWithLongLabel
+            <NumberField
               label='Vegetables (cup)'
               value={options.vegetables}
               changeHandler={changeHandler('vegetables')}
             />
-            <TextFieldWithLongLabel
+            <NumberField
               label='Fruits (cup)'
               value={options.fruits}
               changeHandler={changeHandler('fruits')}
             />
-            <TextFieldWithLongLabel
+            <NumberField
               label='Dairy (cup)'
               value={options.dairy}
               changeHandler={changeHandler('dairy')}
             />
-            <TextFieldWithLongLabel
+            <NumberField
               label='Oils (teaspoon)'
               value={options.oils}
               changeHandler={changeHandler('oils')}
@@ -164,4 +174,4 @@ function EmnergencyFoodGuide(props) {
   );
 }
 
-export default EmnergencyFoodGuide;
+export default EmergencyFoodGuide;

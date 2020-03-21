@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import TextFieldWithLongLabel from './../components/TextFieldWithLongLabel';
+import NumberField from './../components/NumberField';
 import clsx from  'clsx';
 
 import { SafeGroupSize as Calculator } from 'coronavirus-epidemiology-model';
@@ -54,6 +54,9 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(0, 0, 1),
     },
   },
+  field: {
+    background: '#fff',
+  },
 }));
 
 function SafeGroupSize(props) {
@@ -96,6 +99,8 @@ function SafeGroupSize(props) {
               options={cities100000}
               getOptionLabel={option => option.name}
               style={{ width: 300 }}
+              className={classes.field}
+              size="small"
               renderInput={params => {
                 return (
                   <TextField {...params} placeholder='New York City' variant="outlined" />
@@ -103,7 +108,7 @@ function SafeGroupSize(props) {
               }}
               onChange={onChangeCity}
             />
-            <TextFieldWithLongLabel
+            <NumberField
               label='Estimated Number of Cases'
               value={options.estimatedNumberOfCases}
               changeHandler={changeHandler('estimatedNumberOfCases')}
