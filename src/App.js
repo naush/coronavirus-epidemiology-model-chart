@@ -6,6 +6,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import Main from './layouts/Main';
 import Home from './containers/Home';
 import SafeGroupSize from './containers/SafeGroupSize';
+import EmergencyFoodGuide from './containers/EmergencyFoodGuide';
 
 import {
   BrowserRouter as Router,
@@ -47,6 +48,11 @@ function App() {
           <Route path='/safe-group-size'>
             <Main>
               <SafeGroupSize />
+            </Main>
+          </Route>
+          <Route path='/emergency-food-guide'>
+            <Main>
+              <EmergencyFoodGuide />
             </Main>
           </Route>
           <Route path='/'>

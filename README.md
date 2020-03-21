@@ -29,6 +29,7 @@ Launches the test runner in the interactive watch mode.<br>
 1. https://ncov2019.live/data
 1. https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/
 1. https://stopcovid19.pichuchen.tw/en/
+1. https://covid19.tzeng17.com/
 1. https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series
 1. https://documenter.getpostman.com/view/1223095/SzS4S7kd?version=latest
 

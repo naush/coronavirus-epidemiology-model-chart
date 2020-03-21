@@ -40,6 +40,7 @@ function Navigator(props) {
       >
         <MenuItem onClick={handleClose('/')}>Projection</MenuItem>
         <MenuItem onClick={handleClose('/safe-group-size')}>Safe Group Size</MenuItem>
+        <MenuItem onClick={handleClose('/emergency-food-guide')}>Emergency Food Guide</MenuItem>
         <MenuItem>
           <Link target="_blank" href="https://www.sleepphones.com/Coronavirus-predictions-mortality-rate">
             Dr. Wei-Shin Lai
