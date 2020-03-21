@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -24,23 +23,6 @@ const useStyles = makeStyles(theme => ({
   item: {
     width: '100%',
   },
-  dashboard: {
-    margin: theme.spacing(2),
-  },
-  figure: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: `${theme.spacing(12)}px`,
-      lineHeight: `${theme.spacing(14)}px`,
-    },
-
-    [theme.breakpoints.up('sm')]: {
-      fontSize: `${theme.spacing(36)}px`,
-      lineHeight: `${theme.spacing(42)}px`,
-    },
-  },
-  subtitle: {
-    color: theme.palette.quinary.main,
-  },
   control: {
     background: theme.palette.senary.main,
     margin: theme.spacing(2),
@@ -54,10 +36,19 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(0, 0, 1),
     },
   },
+  category: {
+    border: `1px ${theme.palette.senary.main} solid`,
+    margin: theme.spacing(2),
+    padding: theme.spacing(2),
+  },
+  categoryLabel: {
+    textTransform: 'capitalize',
+  },
 }));
 
 function EmergencyFoodGuide(props) {
   const classes = useStyles();
+  const theme = useTheme();
 
   const defaultPerson = {gender: 'f', age: 34};
   const defaultConsumption = new Consumption([defaultPerson]).ofDay(7);
@@ -149,24 +140,31 @@ function EmergencyFoodGuide(props) {
             />
           </Paper>
         </Grid>
-        <Grid item sm={9} className={classes.item}>
+        <Grid item sm={9} className={classes.item} spacing={3}>
           <Paper elevation={0} className={classes.paper}>
-            <Box className={classes.dashboard}>
+            <Grid container>
               {
                 categories.map((category) => {
+                  const fontSize = theme.spacing(36);
+                  const lineHeight = theme.spacing(42);
+                  const numberOfDigits = category.days.toString().length;
+
                   return (
-                    <React.Fragment key={category.name}>
-                      <Typography variant="body1">
+                    <Grid className={classes.category} sm={3} xs={10} key={category.name}>
+                      <Typography className={classes.categoryLabel} variant="h6">
                         {category.name}
                       </Typography>
-                      <Typography className={classes.figure} color="primary">
+                      <Typography style={{
+                        fontSize: `${fontSize / numberOfDigits}px`,
+                        lineHeight: `${lineHeight}px`,
+                      }} color="primary">
                         {category.days}
                       </Typography>
-                    </React.Fragment>
+                    </Grid>
                   );
                 })
               }
-            </Box>
+            </Grid>
           </Paper>
         </Grid>
       </Grid>
