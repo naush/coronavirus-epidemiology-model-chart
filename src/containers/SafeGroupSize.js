@@ -118,7 +118,7 @@ function SafeGroupSize(props) {
         <Grid item sm={9} className={classes.item}>
           <Paper elevation={0} className={classes.paper}>
             <Box className={classes.dashboard}>
-              <Typography variant="body1">
+              <Typography variant='h6'>
                 The Largest Safe Group Size
               </Typography>
               <Typography className={classes.figure} color="primary">
