@@ -81,7 +81,7 @@ function EmergencyFoodGuide(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const defaultPerson = {gender: 'f', age: 34};
+  const defaultPerson = {gender: 'f', age: 30};
   const defaultConsumption = new Consumption([defaultPerson]).ofDay(7);
   const defaults = {
     gender: defaultPerson.gender,

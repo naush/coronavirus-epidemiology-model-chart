@@ -7,6 +7,7 @@ import Main from './layouts/Main';
 import PredictionModel from './containers/PredictionModel';
 import SafeGroupSize from './containers/SafeGroupSize';
 import EmergencyFoodGuide from './containers/EmergencyFoodGuide';
+import Credits from './containers/Credits';
 
 import {
   BrowserRouter as Router,
@@ -54,6 +55,11 @@ function App() {
           <Route path='/emergency-food-guide'>
             <Main title='Emergency Food Guide'>
               <EmergencyFoodGuide />
+            </Main>
+          </Route>
+          <Route path='/credits'>
+            <Main title='Credits'>
+              <Credits />
             </Main>
           </Route>
           <Route path='/'>

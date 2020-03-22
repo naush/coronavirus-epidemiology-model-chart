@@ -5,7 +5,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -30,8 +29,10 @@ function Navigator(props) {
   };
 
   return (
-    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-      <MenuIcon onClick={handleOpen} />
+    <React.Fragment>
+      <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={handleOpen}>
+        <MenuIcon />
+      </IconButton>
       <Menu
         anchorEl={anchor}
         keepMounted
@@ -41,13 +42,9 @@ function Navigator(props) {
         <MenuItem onClick={handleClose('/')}>Prediction Model</MenuItem>
         <MenuItem onClick={handleClose('/safe-group-size')}>Safe Group Size</MenuItem>
         <MenuItem onClick={handleClose('/emergency-food-guide')}>Emergency Food Guide</MenuItem>
-        <MenuItem>
-          <Link target="_blank" href="https://www.sleepphones.com/Coronavirus-predictions-mortality-rate">
-            Dr. Wei-Shin Lai
-          </Link>
-        </MenuItem>
+        <MenuItem onClick={handleClose('/credits')}>Credits</MenuItem>
       </Menu>
-    </IconButton>
+    </React.Fragment>
   );
 }
 
