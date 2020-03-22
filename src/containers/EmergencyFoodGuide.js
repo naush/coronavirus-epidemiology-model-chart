@@ -49,6 +49,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2),
     padding: theme.spacing(2),
     position: 'relative',
+    width: '100%',
   },
   categoryLabel: {
     textTransform: 'capitalize',
@@ -59,10 +60,10 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(8),
     position: 'absolute',
     bottom: theme.spacing(1),
-    right: theme.spacing(1),
+    left: theme.spacing(1),
   },
   categoryUnit: {
-    textAlign: 'left',
+    textAlign: 'right',
     color: theme.palette.primary.main,
   },
   instruction: {

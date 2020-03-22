@@ -4,7 +4,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
 
 import Main from './layouts/Main';
-import EpidemiologyModel from './containers/EpidemiologyModel';
+import PredictionModel from './containers/PredictionModel';
 import SafeGroupSize from './containers/SafeGroupSize';
 import EmergencyFoodGuide from './containers/EmergencyFoodGuide';
 
@@ -35,6 +35,7 @@ const theme = createMuiTheme({
       main: '#ECEFF1',
     },
     text: {
+      primary: '#333333',
       secondary: '#333333',
     },
   },
@@ -56,8 +57,8 @@ function App() {
             </Main>
           </Route>
           <Route path='/'>
-            <Main title='Epidemiology Model'>
-              <EpidemiologyModel />
+            <Main title='Prediction Model'>
+              <PredictionModel />
             </Main>
           </Route>
         </Switch>

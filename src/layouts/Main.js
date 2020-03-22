@@ -10,6 +10,10 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  bar: {
+    borderBottom: `2px ${theme.palette.senary.main} solid`,
+    color: theme.palette.text.primary,
+  },
 }));
 
 function Main(props) {
@@ -21,7 +25,12 @@ function Main(props) {
       maxWidth={false}
       disableGutters={true}
     >
-      <AppBar position="static" elevation={0}>
+      <AppBar
+        color='inherit'
+        className={classes.bar}
+        position='static'
+        elevation={0}
+      >
         <Toolbar>
           <Navigator />
           <Typography variant="h6" className={classes.title}>

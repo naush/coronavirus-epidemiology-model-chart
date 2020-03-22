@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Home(props) {
+function PredictionModel(props) {
   const classes = useStyles();
 
   const [options, setOptions] = useState({
@@ -157,4 +157,4 @@ function Home(props) {
   );
 }
 
-export default Home;
+export default PredictionModel;

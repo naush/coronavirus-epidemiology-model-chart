@@ -38,7 +38,7 @@ function Navigator(props) {
         open={Boolean(anchor)}
         onClose={handleClose()}
       >
-        <MenuItem onClick={handleClose('/')}>Epidemiology Model</MenuItem>
+        <MenuItem onClick={handleClose('/')}>Prediction Model</MenuItem>
         <MenuItem onClick={handleClose('/safe-group-size')}>Safe Group Size</MenuItem>
         <MenuItem onClick={handleClose('/emergency-food-guide')}>Emergency Food Guide</MenuItem>
         <MenuItem>
