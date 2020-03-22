@@ -46,25 +46,20 @@ const useStyles = makeStyles(theme => ({
     },
   },
   category: {
-    border: `1px ${theme.palette.primary.main} solid`,
+    border: `2px ${theme.palette.senary.main} solid`,
     margin: theme.spacing(2),
-    padding: theme.spacing(2),
+    padding: theme.spacing(2, 0, 0),
     position: 'relative',
-    width: '100%',
   },
   categoryLabel: {
     textTransform: 'capitalize',
     textDecoration: 'underline',
   },
   categoryIcon: {
-    width: theme.spacing(8),
-    height: theme.spacing(8),
-    position: 'absolute',
-    bottom: theme.spacing(1),
-    left: theme.spacing(1),
+    width: theme.spacing(24),
+    height: theme.spacing(32),
   },
-  categoryUnit: {
-    textAlign: 'right',
+  remaining: {
     color: theme.palette.primary.main,
   },
   instructionText: {
@@ -202,38 +197,35 @@ function EmergencyFoodGuide(props) {
             <Grid container>
               {
                 categories.map((category) => {
-                  const fontSize = theme.spacing(24);
-                  const lineHeight = theme.spacing(32);
-                  const days = category.days.toFixed(0);
-                  const numberOfDigits = days.toString().length;
                   const Icon = icons[category.name];
                   const link = links[category.name];
-                  var color = theme.palette.primary.main;
+                  const days = category.days.toFixed(0);
+                  var borderColor = theme.palette.senary.main;
 
-                  if (days <= 0) {
-                    color = theme.palette.senary.main;
-                  } else if (days <= 3) {
-                    color = theme.palette.primary.light;
+                  if (days <= 2) {
+                    borderColor = theme.palette.quinary.main;
                   }
 
                   return (
-                    <Grid item className={classes.category} sm={3} xs={10} key={category.name}>
-                      <Typography className={classes.categoryLabel} variant="h6">
-                        <Link target='_blank' href={link}>
+                    <Grid
+                      item
+                      className={classes.category}
+                      style={{borderColor: borderColor}}
+                      sm={3}
+                      xs={10}
+                      key={category.name}
+                    >
+                      <Typography
+                        className={classes.remaining}
+                        variant="h6"
+                      >
+                        <Link className={classes.categoryLabel} target='_blank' href={link}>
                           {category.name}
-                        </Link>
+                        </Link>: {days} days left
                       </Typography>
-                      <Typography style={{
-                        color: color,
-                        fontSize: `${fontSize / numberOfDigits}px`,
-                        lineHeight: `${lineHeight}px`,
-                      }}>
-                        {days}
-                      </Typography>
-                      <Typography className={classes.categoryUnit} variant="h6">
-                        Days Left
-                      </Typography>
-                      <Icon className={classes.categoryIcon} />
+                      <Link target='_blank' href={link}>
+                        <Icon className={classes.categoryIcon} />
+                      </Link>
                     </Grid>
                   );
                 })
