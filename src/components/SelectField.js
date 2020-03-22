@@ -49,8 +49,8 @@ function NumberField(props) {
         {
           choices.map((choice) => {
             return (
-              <MenuItem value={choice} key={choice}>
-                {choice.toUpperCase()}
+              <MenuItem value={choice.value} key={choice.value}>
+                {choice.label}
               </MenuItem>
             );
           })

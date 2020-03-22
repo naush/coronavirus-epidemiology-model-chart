@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import NumberField from './../components/NumberField';
 import SelectField from './../components/SelectField';
+import Instruction from './../components/Instruction';
 import clsx from  'clsx';
 
 import { InventoryDays, Consumption } from 'emergency-food-guide';
@@ -65,18 +66,6 @@ const useStyles = makeStyles(theme => ({
   categoryUnit: {
     textAlign: 'right',
     color: theme.palette.primary.main,
-  },
-  instruction: {
-    textAlign: 'left',
-    borderBottom: `2px ${theme.palette.senary.main} solid`,
-
-    [theme.breakpoints.up('sm')]: {
-      margin: theme.spacing(2, 2, 1, 1),
-    },
-
-    [theme.breakpoints.down('sm')]: {
-      margin: theme.spacing(0, 2),
-    },
   },
   instructionText: {
     fontSize: 20,
@@ -145,11 +134,13 @@ function EmergencyFoodGuide(props) {
   };
 
   const instruction = (
-    <Paper elevation={0} className={clsx(classes.paper, classes.instruction)} square>
-      <Typography className={classes.instructionText}>
-        Find out how many days your food will last by entering your gender, age and how much you have in stock for each food group. Our calculations are based on the daily recommended intakes provided by <Link target='_blank' href='https://www.choosemyplate.gov/resources/MyPlatePlan'>ChooseMyPlate</Link>, a project of the U.S. Department of Agriculture.
-      </Typography>
-    </Paper>
+    <Instruction
+      text={
+        <React.Fragment>
+          Find out how many days your food will last by entering your gender, age and how much you have in stock for each food group. Our calculations are based on the daily recommended intakes provided by <Link target='_blank' href='https://www.choosemyplate.gov/resources/MyPlatePlan'>ChooseMyPlate</Link>, a project of the U.S. Department of Agriculture.
+        </React.Fragment>
+      }
+    />
   );
 
   return (
@@ -164,7 +155,7 @@ function EmergencyFoodGuide(props) {
           <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
             <SelectField
               label='Gender'
-              choices={['f', 'm']}
+              choices={[{label: 'Female', value: 'f'}, {label: 'Male', value: 'm'}]}
               value={options.gender}
               changeHandler={changeHandler('gender')}
             />
