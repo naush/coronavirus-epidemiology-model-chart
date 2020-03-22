@@ -61,6 +61,10 @@ const useStyles = makeStyles(theme => ({
     bottom: theme.spacing(1),
     right: theme.spacing(1),
   },
+  categoryUnit: {
+    textAlign: 'left',
+    color: theme.palette.primary.main,
+  },
   instruction: {
     textAlign: 'left',
     borderBottom: `2px ${theme.palette.senary.main} solid`,
