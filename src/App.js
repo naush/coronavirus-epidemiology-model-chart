@@ -46,17 +46,17 @@ function App() {
       <Router>
         <Switch>
           <Route path='/safe-group-size'>
-            <Main>
+            <Main title='Safe Group Size'>
               <SafeGroupSize />
             </Main>
           </Route>
           <Route path='/emergency-food-guide'>
-            <Main>
+            <Main title='Emergency Food Guide'>
               <EmergencyFoodGuide />
             </Main>
           </Route>
           <Route path='/'>
-            <Main>
+            <Main title='Epidemiology Model'>
               <EpidemiologyModel />
             </Main>
           </Route>

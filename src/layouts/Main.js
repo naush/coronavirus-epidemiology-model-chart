@@ -14,6 +14,7 @@ const useStyles = makeStyles(theme => ({
 
 function Main(props) {
   const classes = useStyles();
+  const { title } = props;
 
   return (
     <Container
@@ -24,7 +25,7 @@ function Main(props) {
         <Toolbar>
           <Navigator />
           <Typography variant="h6" className={classes.title}>
-            Coronavirus Utilities
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>

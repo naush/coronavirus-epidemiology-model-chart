@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { ReactComponent as Grains } from './../assets/images/grains.svg';
 import { ReactComponent as Protein } from './../assets/images/protein.svg';
@@ -31,8 +32,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   control: {
-    background: theme.palette.senary.main,
     margin: theme.spacing(2),
+    background: theme.palette.senary.main,
   },
   label: {
     fontWeight: 500,
@@ -44,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   category: {
-    border: `1px ${theme.palette.senary.main} solid`,
+    border: `1px ${theme.palette.primary.main} solid`,
     margin: theme.spacing(2),
     padding: theme.spacing(2),
     position: 'relative',
@@ -60,11 +61,31 @@ const useStyles = makeStyles(theme => ({
     bottom: theme.spacing(1),
     right: theme.spacing(1),
   },
+  instruction: {
+    textAlign: 'left',
+    borderBottom: `2px ${theme.palette.senary.main} solid`,
+
+    [theme.breakpoints.up('sm')]: {
+      margin: theme.spacing(2, 2, 1, 1),
+    },
+
+    [theme.breakpoints.down('sm')]: {
+      margin: theme.spacing(0, 2),
+    },
+  },
+  instructionText: {
+    fontSize: 20,
+
+    '& a': {
+      textDecoration: 'underline',
+    },
+  },
 }));
 
 function EmergencyFoodGuide(props) {
   const classes = useStyles();
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const defaultPerson = {gender: 'f', age: 34};
   const defaultConsumption = new Consumption([defaultPerson]).ofDay(7);
@@ -118,6 +139,14 @@ function EmergencyFoodGuide(props) {
     'oils': 'https://www.choosemyplate.gov/eathealthy/oils',
   };
 
+  const instruction = (
+    <Paper elevation={0} className={clsx(classes.paper, classes.instruction)} square>
+      <Typography className={classes.instructionText}>
+        Find out how many days your food will last by entering your gender, age and how much you have in stock for each food group. Our calculations are based on the daily recommended intakes provided by <Link target='_blank' href='https://www.choosemyplate.gov/resources/MyPlatePlan'>ChooseMyPlate</Link>, a project of the U.S. Department of Agriculture.
+      </Typography>
+    </Paper>
+  );
+
   return (
     <Container
       maxWidth={false}
@@ -126,20 +155,19 @@ function EmergencyFoodGuide(props) {
     >
       <Grid container spacing={0} className={classes.root}>
         <Grid item sm={3} className={classes.item}>
+          { isMobile && instruction }
           <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
             <SelectField
-              label='Your Gender'
+              label='Gender'
               choices={['f', 'm']}
               value={options.gender}
               changeHandler={changeHandler('gender')}
             />
             <NumberField
-              label='Your Age'
+              label='Age'
               value={options.age}
               changeHandler={changeHandler('age')}
             />
-          </Paper>
-          <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
             <NumberField
               label='Grains (ounce)'
               value={options.grains}
@@ -173,6 +201,7 @@ function EmergencyFoodGuide(props) {
           </Paper>
         </Grid>
         <Grid item sm={9} className={classes.item}>
+          { !isMobile && instruction }
           <Paper elevation={0} className={classes.paper}>
             <Grid container>
               {
