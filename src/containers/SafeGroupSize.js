@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -7,6 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import NumberField from './../components/NumberField';
+import Instruction from './../components/Instruction';
+import Link from '@material-ui/core/Link';
+
 import clsx from  'clsx';
 
 import { SafeGroupSize as Calculator } from 'coronavirus-epidemiology-model';
@@ -24,9 +28,6 @@ const useStyles = makeStyles(theme => ({
   item: {
     width: '100%',
   },
-  dashboard: {
-    margin: theme.spacing(2),
-  },
   figure: {
     [theme.breakpoints.down('sm')]: {
       fontSize: `${theme.spacing(12)}px`,
@@ -35,11 +36,10 @@ const useStyles = makeStyles(theme => ({
 
     [theme.breakpoints.up('sm')]: {
       fontSize: `${theme.spacing(36)}px`,
-      lineHeight: `${theme.spacing(42)}px`,
+      lineHeight: `${theme.spacing(40)}px`,
     },
   },
   subtitle: {
-    color: theme.palette.quinary.main,
   },
   control: {
     background: theme.palette.senary.main,
@@ -61,9 +61,12 @@ const useStyles = makeStyles(theme => ({
 
 function SafeGroupSize(props) {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const defaultCityPopulation = cities100000.find((city) => city.name === 'New York City').population;
 
   const [options, setOptions] = useState({
+    cityName: 'New York City',
     populationInMetropolitanArea: defaultCityPopulation,
     estimatedNumberOfCases: 3000,
   });
@@ -79,10 +82,21 @@ function SafeGroupSize(props) {
     if (city) {
       setOptions({
         ...options,
-        'populationInMetropolitanArea': city.population,
+        cityName: city.name,
+        populationInMetropolitanArea: city.population,
       });
     }
   }
+
+  const instruction = (
+    <Instruction
+      text={
+        <React.Fragment>
+          We define a safe group size as the minimum number of people in a gathering where there is at least a 95% chance you will not encounter someone with coronavirus. Find out what your safe group size is by choosing a metropolitan area, and use either the <Link target='_blank' href='https://coronavirus.jhu.edu/map.html'>Coronavirus Map by Johns Hopkins</Link> or the <Link href='/prediction_model'>Prediction Model</Link> to find the number of confirmed cases.
+        </React.Fragment>
+      }
+    />
+  );
 
   return (
     <Container
@@ -91,6 +105,7 @@ function SafeGroupSize(props) {
     >
       <Grid container spacing={0}>
         <Grid item sm={3} className={classes.item}>
+          {isMobile && instruction}
           <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
             <Typography variant='body1' className={classes.label}>
               Metropolitan Area
@@ -103,7 +118,11 @@ function SafeGroupSize(props) {
               size="small"
               renderInput={params => {
                 return (
-                  <TextField {...params} placeholder='New York City' variant="outlined" />
+                  <TextField
+                    {...params}
+                    placeholder={options.cityName}
+                    variant="outlined"
+                  />
                 );
               }}
               onChange={onChangeCity}
@@ -116,16 +135,14 @@ function SafeGroupSize(props) {
           </Paper>
         </Grid>
         <Grid item sm={9} className={classes.item}>
+          {!isMobile && instruction}
           <Paper elevation={0} className={classes.paper}>
-            <Box className={classes.dashboard}>
-              <Typography variant='h6'>
-                The Largest Safe Group Size
+            <Box>
+              <Typography variant="h6" className={classes.subtitle}>
+                In {options.cityName}, with an estimated population of {Number(options.populationInMetropolitanArea).toLocaleString('en-US')}, your safe group size is:
               </Typography>
               <Typography className={classes.figure} color="primary">
                 {Calculator.calculate(options).toFixed(0)}
-              </Typography>
-              <Typography variant="body1" className={classes.subtitle}>
-                * 95% chance you will not encounter someone with coronavirus.
               </Typography>
             </Box>
           </Paper>
