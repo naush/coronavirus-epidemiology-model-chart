@@ -36,13 +36,14 @@ function Category(props) {
 
   const Icon = group.icon;
   const link = group.link;
-  const days = category.days.toFixed(0);
+  var days = category.days;
   var borderColor = theme.palette.senary.main;
 
   if (days <= 0) {
     borderColor = theme.palette.quinary.main;
+  } else if (days === Infinity) {
+    days = 0;
   }
-
   return (
     <Grid
       item
@@ -58,7 +59,7 @@ function Category(props) {
       >
         <Link className={classes.label} target='_blank' href={link}>
           {category.name}
-        </Link>: {days} day{Number(days) === 1 ? '' : 's'} left
+        </Link>: {days.toFixed(0)} day{Number(days) === 1 ? '' : 's'} left
       </Typography>
       <Link target='_blank' href={link}>
         <Icon className={classes.icon} />

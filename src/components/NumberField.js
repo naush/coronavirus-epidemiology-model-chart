@@ -23,7 +23,9 @@ function NumberField(props) {
   const {
     label,
     value,
-    changeHandler
+    changeHandler,
+    min,
+    max,
   } = props;
 
   const formatChange = (e) => {
@@ -44,6 +46,10 @@ function NumberField(props) {
         className={classes.field}
         variant="outlined"
         size="small"
+        inputProps={{
+          min: min || 0,
+          max: max || Number.MAX_SAFE_INTEGER,
+        }}
         fullWidth
       />
     </Fragment>

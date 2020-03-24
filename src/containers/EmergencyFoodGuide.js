@@ -117,6 +117,8 @@ function EmergencyFoodGuide(props) {
             <NumberField
               label='Age'
               value={options.age}
+              min={2}
+              max={200}
               changeHandler={changeHandler('age')}
             />
             <NumberField
