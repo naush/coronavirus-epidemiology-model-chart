@@ -1,6 +1,9 @@
 import React  from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { DatePicker } from '@material-ui/pickers';
+import startOfYear from 'date-fns/startOfYear'
+import endOfYear from 'date-fns/endOfYear'
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -17,6 +20,7 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 import Headline from './../components/Headline';
 import NumberField from './../components/NumberField';
+import PTOChart from './../components/PTOChart';
 import clsx from  'clsx';
 
 const useStyles = makeStyles(theme => ({
@@ -32,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   },
   actions: {
     padding: theme.spacing(2, 0, 0, 2),
-    margin: theme.spacing(4, 2, 4, 1),
+    margin: theme.spacing(3, 2, 4, 1),
     borderTop: `2px ${theme.palette.senary.main} solid`,
   },
   field: {
@@ -43,11 +47,16 @@ const useStyles = makeStyles(theme => ({
   answer: {
     margin: theme.spacing(2, 2, 2, 0),
   },
+  date: {
+    display: 'block',
+    margin: theme.spacing(0, 0, 2),
+  },
 }));
 
 function PTOCalculator(props) {
   const classes = useStyles();
   const theme = useTheme();
+  const now = new Date();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [activeStep, setActiveStep] = React.useState(0);
   const [options, setOptions] = React.useState({
@@ -56,6 +65,10 @@ function PTOCalculator(props) {
     amount: 4.62,
     cap: 264,
     reset: 'never',
+    from: startOfYear(now),
+    to: endOfYear(now),
+    start: 0,
+    used: 0,
   });
 
   const handleToggleChange = (attribute) => (e, value) => {
@@ -72,9 +85,16 @@ function PTOCalculator(props) {
     });
   }
 
+  const data = {
+    start: options.start,
+    accrued: 15,
+    used: options.used,
+    unit: options.unit,
+  };
+
   const steps = [
     {
-      label: 'Tell us about your company PTO policy',
+      label: 'Tell us about your company PTO Policy',
       content: (
         <Paper elevation={0} square>
           <Box className={classes.field}>
@@ -126,6 +146,7 @@ function PTOCalculator(props) {
             </Typography>
             <Paper elevation={0} square className={classes.answer}>
               <NumberField
+                key="amount"
                 value={options.amount}
                 changeHandler={handleChange('amount')}
                 fullWidth={false}
@@ -139,6 +160,7 @@ function PTOCalculator(props) {
             </Typography>
             <Paper elevation={0} square className={classes.answer}>
               <NumberField
+                key="cap"
                 value={options.cap}
                 changeHandler={handleChange('cap')}
                 fullWidth={false}
@@ -170,24 +192,79 @@ function PTOCalculator(props) {
       ),
     },
     {
-      label: 'Tell us about your current PTO cycle',
+      label: 'Tell us about your current PTO Cycle',
       content: (
         <Paper elevation={0} square>
-          <Typography variant="h6">
-            When does it start and end?
-          </Typography>
-          <Typography variant="h6">
-            What was the starting balance?
-          </Typography>
-          <Typography variant="h6">
-            How many {options.unit}s have you used?
-          </Typography>
+          <Box className={classes.field}>
+            <Typography variant="h6" className={classes.question}>
+              When does it start and end?
+            </Typography>
+            <Paper elevation={0} square className={classes.answer}>
+              <DatePicker
+                autoOk
+                className={classes.date}
+                value={options.from}
+                maxDate={options.to}
+                format="yyyy/MM/dd"
+                onChange={handleChange('from')}
+                inputVariant="outlined"
+                inputProps={{
+                  size: "small",
+                }}
+                label="From"
+              />
+              <DatePicker
+                className={classes.date}
+                autoOk
+                value={options.to}
+                minDate={options.from}
+                format="yyyy/MM/dd"
+                onChange={handleChange('to')}
+                inputVariant="outlined"
+                label="To"
+              />
+            </Paper>
+          </Box>
+          <Box className={classes.field}>
+            <Typography variant="h6" className={classes.question}>
+              What was the starting balance?
+            </Typography>
+            <Paper elevation={0} square className={classes.answer}>
+              <NumberField
+                key="start"
+                value={options.start}
+                changeHandler={handleChange('start')}
+                fullWidth={false}
+                unit={`${options.unit}s`}
+              />
+            </Paper>
+          </Box>
+          <Box className={classes.field}>
+            <Typography variant="h6" className={classes.question}>
+              How many {options.unit}s have you used?
+            </Typography>
+            <Paper elevation={0} square className={classes.answer}>
+              <NumberField
+                key="used"
+                value={options.used}
+                changeHandler={handleChange('used')}
+                fullWidth={false}
+                unit={`${options.unit}s`}
+              />
+            </Paper>
+          </Box>
         </Paper>
       ),
     },
     {
-      label: 'See your PTO balance',
-      content: 'Chart',
+      label: 'See your PTO Balance',
+      content: (
+        <Paper elevation={0} square>
+          <PTOChart
+            data={data}
+          />
+        </Paper>
+      ),
     },
   ];
 
@@ -210,7 +287,6 @@ function PTOCalculator(props) {
       }
     />
   );
-
 
   if (isMobile) {
     return null;
@@ -237,7 +313,7 @@ function PTOCalculator(props) {
             </Paper>
           </Grid>
           <Grid item sm={9} className={classes.item}>
-            { headline }
+            {headline}
             <Paper elevation={0} className={classes.content}>
               {step.content}
             </Paper>
@@ -268,4 +344,3 @@ function PTOCalculator(props) {
 }
 
 export default PTOCalculator;
-

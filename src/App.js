@@ -2,6 +2,8 @@ import React from 'react';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 import Main from './layouts/Main';
 import PredictionModel from './containers/PredictionModel';
@@ -46,35 +48,37 @@ const theme = createMuiTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <Switch>
-          <Route path='/safe-group-size'>
-            <Main title='Safe Group Size'>
-              <SafeGroupSize />
-            </Main>
-          </Route>
-          <Route path='/emergency-food-guide'>
-            <Main title='Emergency Food Guide'>
-              <EmergencyFoodGuide />
-            </Main>
-          </Route>
-          <Route path='/pto-calculator'>
-            <Main title='Paid Time Off'>
-              <PTOCalculator />
-            </Main>
-          </Route>
-          <Route path='/credits'>
-            <Main title='Credits'>
-              <Credits />
-            </Main>
-          </Route>
-          <Route path='/'>
-            <Main title='Prediction Model'>
-              <PredictionModel />
-            </Main>
-          </Route>
-        </Switch>
-      </Router>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Router>
+          <Switch>
+            <Route path='/safe-group-size'>
+              <Main title='Safe Group Size'>
+                <SafeGroupSize />
+              </Main>
+            </Route>
+            <Route path='/emergency-food-guide'>
+              <Main title='Emergency Food Guide'>
+                <EmergencyFoodGuide />
+              </Main>
+            </Route>
+            <Route path='/pto-calculator'>
+              <Main title='Paid Time Off'>
+                <PTOCalculator />
+              </Main>
+            </Route>
+            <Route path='/credits'>
+              <Main title='Credits'>
+                <Credits />
+              </Main>
+            </Route>
+            <Route path='/'>
+              <Main title='Prediction Model'>
+                <PredictionModel />
+              </Main>
+            </Route>
+          </Switch>
+        </Router>
+      </MuiPickersUtilsProvider>
     </ThemeProvider>
   );
 }
