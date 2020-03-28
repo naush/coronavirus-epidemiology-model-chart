@@ -7,6 +7,7 @@ import Main from './layouts/Main';
 import PredictionModel from './containers/PredictionModel';
 import SafeGroupSize from './containers/SafeGroupSize';
 import EmergencyFoodGuide from './containers/EmergencyFoodGuide';
+import PTOCalculator from './containers/PTOCalculator';
 import Credits from './containers/Credits';
 
 import {
@@ -55,6 +56,11 @@ function App() {
           <Route path='/emergency-food-guide'>
             <Main title='Emergency Food Guide'>
               <EmergencyFoodGuide />
+            </Main>
+          </Route>
+          <Route path='/pto-calculator'>
+            <Main title='Paid Time Off'>
+              <PTOCalculator />
             </Main>
           </Route>
           <Route path='/credits'>

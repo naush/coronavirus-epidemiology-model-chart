@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Instruction(props) {
+function Headline(props) {
   const classes = useStyles();
   const { text } = props;
 
@@ -41,4 +41,4 @@ function Instruction(props) {
   );
 }
 
-export default Instruction;
+export default Headline;

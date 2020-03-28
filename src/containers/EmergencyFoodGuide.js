@@ -9,7 +9,7 @@ import Category from './../components/Category';
 import Container from '@material-ui/core/Container';
 import NumberField from './../components/NumberField';
 import SelectField from './../components/SelectField';
-import Instruction from './../components/Instruction';
+import Headline from './../components/Headline';
 import FoodGroup from './../models/FoodGroup';
 import clsx from  'clsx';
 
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(0, 0, 1),
     },
   },
-  instructionText: {
+  headlineText: {
     fontSize: 20,
 
     '& a': {
@@ -88,8 +88,8 @@ function EmergencyFoodGuide(props) {
   const inventoryDays = new InventoryDays();
   const categories = inventoryDays.calculate(stock, people);
 
-  const instruction = (
-    <Instruction
+  const headline = (
+    <Headline
       text={
         <React.Fragment>
           Find out how many days your food will last by entering your gender, age and how much you have in stock for each food group. Our calculations are based on the daily recommended intakes provided by <Link target='_blank' href='https://www.choosemyplate.gov/resources/MyPlatePlan'>ChooseMyPlate</Link>, a project of the U.S. Department of Agriculture.
@@ -106,7 +106,7 @@ function EmergencyFoodGuide(props) {
     >
       <Grid container spacing={0} className={classes.root}>
         <Grid item sm={3} className={classes.item}>
-          { isMobile && instruction }
+          { isMobile && headline }
           <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
             <SelectField
               label='Gender'
@@ -120,47 +120,55 @@ function EmergencyFoodGuide(props) {
               min={2}
               max={200}
               changeHandler={changeHandler('age')}
+              unit="years"
             />
             <NumberField
-              label='Grains (ounce)'
+              label='Grains'
               value={options.grains}
               changeHandler={changeHandler('grains')}
+              unit="oz"
             />
             <NumberField
-              label='Protein (ounce)'
+              label='Protein'
               value={options.protein}
               changeHandler={changeHandler('protein')}
+              unit="oz"
             />
             <NumberField
-              label='Vegetables (cup)'
+              label='Vegetable'
               value={options.vegetables}
               changeHandler={changeHandler('vegetables')}
+              unit="cups"
             />
             <NumberField
-              label='Fruits (cup)'
+              label='Fruits'
               value={options.fruits}
               changeHandler={changeHandler('fruits')}
+              unit="cups"
             />
             <NumberField
-              label='Dairy (cup)'
+              label='Dairy'
               value={options.dairy}
               changeHandler={changeHandler('dairy')}
+              unit="cups"
             />
             <NumberField
-              label='Oils (teaspoon)'
+              label='Oils'
               value={options.oils}
               changeHandler={changeHandler('oils')}
+              unit="teaspoons"
             />
           </Paper>
         </Grid>
         <Grid item sm={9} className={classes.item}>
-          { !isMobile && instruction }
+          { !isMobile && headline }
           <Paper elevation={0} className={classes.paper}>
             <Grid container>
               {
                 categories.map((category) => {
                   return (
                     <Category
+                      key={category.name}
                       category={category}
                       group={groups[category.name]}
                     />
