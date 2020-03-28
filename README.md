@@ -33,7 +33,6 @@ Launches the test runner in the interactive watch mode.<br>
 1. https://covid19.fyi/#/
 1. https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series
 1. https://documenter.getpostman.com/view/1223095/SzS4S7kd?version=latest
-1. https://tw.againstcovid19.com/
 1. https://coronarwanda.com/
 1. https://covid-19.nchc.org.tw/
 

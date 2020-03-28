@@ -17,6 +17,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import Link from '@material-ui/core/Link';
 
 import Headline from './../components/Headline';
 import NumberField from './../components/NumberField';
@@ -50,6 +51,16 @@ const useStyles = makeStyles(theme => ({
   date: {
     display: 'block',
     margin: theme.spacing(0, 0, 2),
+  },
+  text: {
+    fontSize: 20,
+
+    '& a': {
+      textDecoration: 'underline',
+    },
+  },
+  headline: {
+    fontWeight: 500,
   },
 }));
 
@@ -93,6 +104,20 @@ function PTOCalculator(props) {
   };
 
   const steps = [
+    {
+      label: 'Introduction',
+      content: (
+        <Paper elevation={0} square>
+          <Typography className={classes.text}>
+            As we brace for an economic downturn, now would be a good time to review your company PTO policy and the cashout option upon termination. Fill out the questionnaire below to understand how PTO is calculated.
+          </Typography>
+          <br />
+          <Typography className={classes.text}>
+            You may also want to read the <Link target='_blank' href='https://www.congress.gov/bill/116th-congress/house-bill/6201'>Families First Coronavirus Response Act (H.R. 6201)</Link> that was passed by Congress and signed into law by the POTUS on March 18 to know your rights. A summary of the bill by Paychex can be read online <Link target='_blank' href='https://www.paychex.com/newsroom/news-releases/paychex-helps-business-families-first-act'>here</Link>.
+          </Typography>
+        </Paper>
+      ),
+    },
     {
       label: 'Tell us about your company PTO Policy',
       content: (
@@ -257,7 +282,7 @@ function PTOCalculator(props) {
       ),
     },
     {
-      label: 'See your PTO Balance',
+      label: 'Your PTO Balance',
       content: (
         <Paper elevation={0} square>
           <PTOChart
@@ -280,11 +305,8 @@ function PTOCalculator(props) {
 
   const headline = (
     <Headline
-      text={
-        <React.Fragment>
-          Calculate your PTO balance.
-        </React.Fragment>
-      }
+      text={step.label}
+      textClass={classes.headline}
     />
   );
 
