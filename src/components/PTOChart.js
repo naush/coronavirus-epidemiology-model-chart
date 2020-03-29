@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   column: {
     display: 'flex',
     flexDirection: 'column',
-    flexBasis: '25%',
+    flexBasis: '45%',
   },
   row: {
     display: 'flex',
@@ -49,7 +49,7 @@ function PTOChart(props) {
         <Box className={classes.column}>
           <Paper square elevation={0} className={classes.paper}>
             <Typography variant="overline" className={classes.overline}>
-              Starting Balance
+              Start
             </Typography>
           </Paper>
           <Paper square elevation={0} className={classes.paper}>

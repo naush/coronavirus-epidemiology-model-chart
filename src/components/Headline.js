@@ -1,6 +1,7 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from  'clsx';
@@ -30,19 +31,27 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Headline(props) {
-  const classes = useStyles();
+  const styles = useStyles();
   const {
     text,
-    textClass,
+    classes,
   } = props;
 
   return (
-    <Paper elevation={0} className={classes.root} square>
-      <Typography className={clsx(classes.text, textClass)}>
+    <Paper elevation={0} className={clsx(styles.root, classes.root)} square>
+      <Typography className={clsx(styles.text, classes.text)}>
         {text}
       </Typography>
     </Paper>
   );
 }
+
+Headline.defaultProps= {
+  classes: {},
+};
+
+Headline.propTypes = {
+  classes: PropTypes.object,
+};
 
 export default Headline;

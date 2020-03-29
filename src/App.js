@@ -52,7 +52,9 @@ theme.overrides.MuiToggleButton = {
     },
   },
   label: {
-    width: theme.spacing(20),
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(20),
+    },
   },
 };
 

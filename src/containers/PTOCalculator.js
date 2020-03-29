@@ -27,6 +27,10 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
+  mobile: {
+    padding: theme.spacing(2),
+    width: '100%',
+  },
   content: {
     margin: theme.spacing(2, 3),
     width: '80%',
@@ -61,8 +65,21 @@ const useStyles = makeStyles(theme => ({
       textDecoration: 'underline',
     },
   },
-  headline: {
+  headlineText: {
     fontWeight: 500,
+
+    [theme.breakpoints.down('sm')]: {
+      fontSize: theme.spacing(3),
+      color: theme.palette.primary.main,
+    },
+  },
+  headlineRoot: {
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      borderBottom: 0,
+      margin: theme.spacing(0),
+      padding: theme.spacing(2, 0),
+    },
   },
 }));
 
@@ -121,7 +138,7 @@ function PTOCalculator(props) {
           </Typography>
           <br />
           <Typography className={classes.text}>
-            You may also want to read the <Link target='_blank' href='https://www.congress.gov/bill/116th-congress/house-bill/6201'>Families First Coronavirus Response Act (H.R. 6201)</Link> that was passed by Congress and signed into law by the POTUS on March 18 to know your rights. A summary of the bill by Paychex can be read online <Link target='_blank' href='https://www.paychex.com/newsroom/news-releases/paychex-helps-business-families-first-act'>here</Link>.
+            You may also want to read the <Link target='_blank' href='https://www.congress.gov/bill/116th-congress/house-bill/6201'>Families First Coronavirus Response Act (H.R. 6201)</Link> that was passed by Congress and signed into law by the President on March 18 to know your rights. A summary of the bill by Paychex can be read <Link target='_blank' href='https://www.paychex.com/newsroom/news-releases/paychex-helps-business-families-first-act'>here</Link>.
           </Typography>
         </Paper>
       ),
@@ -302,12 +319,40 @@ function PTOCalculator(props) {
   const headline = (
     <Headline
       text={step.label}
-      textClass={classes.headline}
+      classes={{
+        text: classes.headlineText,
+        root: classes.headlineRoot,
+      }}
     />
   );
 
   if (isMobile) {
-    return null;
+    return (
+      <Container
+        maxWidth={false}
+        disableGutters={true}
+        className={classes.root}
+      >
+        <Grid container spacing={0} className={classes.mobile}>
+          {
+            steps.map((step, index) => {
+              return (
+                <React.Fragment key={step.label}>
+                  <Headline
+                    text={`${index + 1}. ${step.label}`}
+                    classes={{
+                      text: classes.headlineText,
+                      root: classes.headlineRoot,
+                    }}
+                  />
+                  {step.content}
+                </React.Fragment>
+              );
+            })
+          }
+        </Grid>
+      </Container>
+    );
   } else {
     return (
       <Container
