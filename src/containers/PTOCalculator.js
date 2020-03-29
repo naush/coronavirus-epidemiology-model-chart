@@ -13,12 +13,11 @@ import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Link from '@material-ui/core/Link';
 
 import Headline from './../components/Headline';
 import NumberField from './../components/NumberField';
+import ToggleField from './../components/ToggleField';
 import PTOChart from './../components/PTOChart';
 import clsx from  'clsx';
 import PTOEngine from 'pto-engine';
@@ -28,8 +27,13 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
+  mobile: {
+    padding: theme.spacing(2),
+    width: '100%',
+  },
   content: {
     margin: theme.spacing(2, 3),
+    width: '80%',
   },
   button: {
     marginTop: theme.spacing(1),
@@ -39,6 +43,8 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 0, 0, 2),
     margin: theme.spacing(3, 2, 4, 1),
     borderTop: `2px ${theme.palette.senary.main} solid`,
+    width: '80%',
+    textAlign: 'right',
   },
   field: {
     margin: theme.spacing(0, 0, 2),
@@ -59,8 +65,21 @@ const useStyles = makeStyles(theme => ({
       textDecoration: 'underline',
     },
   },
-  headline: {
+  headlineText: {
     fontWeight: 500,
+
+    [theme.breakpoints.down('sm')]: {
+      fontSize: theme.spacing(3),
+      color: theme.palette.primary.main,
+    },
+  },
+  headlineRoot: {
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      borderBottom: 0,
+      margin: theme.spacing(0),
+      padding: theme.spacing(2, 0),
+    },
   },
 }));
 
@@ -119,7 +138,7 @@ function PTOCalculator(props) {
           </Typography>
           <br />
           <Typography className={classes.text}>
-            You may also want to read the <Link target='_blank' href='https://www.congress.gov/bill/116th-congress/house-bill/6201'>Families First Coronavirus Response Act (H.R. 6201)</Link> that was passed by Congress and signed into law by the POTUS on March 18 to know your rights. A summary of the bill by Paychex can be read online <Link target='_blank' href='https://www.paychex.com/newsroom/news-releases/paychex-helps-business-families-first-act'>here</Link>.
+            You may also want to read the <Link target='_blank' href='https://www.congress.gov/bill/116th-congress/house-bill/6201'>Families First Coronavirus Response Act (H.R. 6201)</Link> that was passed by Congress and signed into law by the President on March 18 to know your rights. A summary of the bill by Paychex can be read <Link target='_blank' href='https://www.paychex.com/newsroom/news-releases/paychex-helps-business-families-first-act'>here</Link>.
           </Typography>
         </Paper>
       ),
@@ -133,19 +152,14 @@ function PTOCalculator(props) {
               Does it use hours or days?
             </Typography>
             <Paper elevation={0} square className={classes.answer}>
-              <ToggleButtonGroup
+              <ToggleField
                 value={options.unit}
-                exclusive
-                onChange={handleToggleChange('unit')}
-                size="small"
-              >
-                <ToggleButton value="hour">
-                  Hour
-                </ToggleButton>
-                <ToggleButton value="day">
-                  Day
-                </ToggleButton>
-              </ToggleButtonGroup>
+                changeHandler={handleToggleChange('unit')}
+                options={[
+                  {label: 'Hour', value: 'hour'},
+                  {label: 'Day', value: 'day'}
+                ]}
+              />
             </Paper>
           </Box>
           <Box className={classes.field}>
@@ -153,25 +167,16 @@ function PTOCalculator(props) {
               How often does it accrue?
             </Typography>
             <Paper elevation={0} square className={classes.answer}>
-              <ToggleButtonGroup
+              <ToggleField
                 value={options.frequency}
-                exclusive
-                onChange={handleToggleChange('frequency')}
-                size="small"
-              >
-                <ToggleButton value="weekly">
-                  Weekly
-                </ToggleButton>
-                <ToggleButton value="biweekly">
-                  Biweekly
-                </ToggleButton>
-                <ToggleButton value="semimonthly">
-                  Semimonthly
-                </ToggleButton>
-                <ToggleButton value="monthly">
-                  Monthly
-                </ToggleButton>
-              </ToggleButtonGroup>
+                changeHandler={handleToggleChange('frequency')}
+                options={[
+                  {label: 'Weekly', value: 'weekly'},
+                  {label: 'Biweekly', value: 'biweekly'},
+                  {label: 'Semimonthly', value: 'semimonthly'},
+                  {label: 'Monthly', value: 'monthly'},
+                ]}
+              />
             </Paper>
           </Box>
           <Box className={classes.field}>
@@ -207,19 +212,14 @@ function PTOCalculator(props) {
               When does it reset?
             </Typography>
             <Paper elevation={0} square className={classes.answer}>
-              <ToggleButtonGroup
+              <ToggleField
                 value={options.reset}
-                exclusive
-                onChange={handleToggleChange('reset')}
-                size="small"
-              >
-                <ToggleButton value="never">
-                  Never
-                </ToggleButton>
-                <ToggleButton value="annually">
-                  Annually
-                </ToggleButton>
-              </ToggleButtonGroup>
+                changeHandler={handleToggleChange('reset')}
+                options={[
+                  {label: 'Never', value: 'never'},
+                  {label: 'Annually', value: 'annually'},
+                ]}
+              />
             </Paper>
           </Box>
         </Paper>
@@ -294,6 +294,10 @@ function PTOCalculator(props) {
       label: 'Your PTO Balance',
       content: (
         <Paper elevation={0} square>
+          <Typography className={classes.text}>
+            Below is a summary of your PTO balance (in {options.unit}s) by the end of your current cycle.
+          </Typography>
+          <br />
           <PTOChart
             data={data}
           />
@@ -315,12 +319,40 @@ function PTOCalculator(props) {
   const headline = (
     <Headline
       text={step.label}
-      textClass={classes.headline}
+      classes={{
+        text: classes.headlineText,
+        root: classes.headlineRoot,
+      }}
     />
   );
 
   if (isMobile) {
-    return null;
+    return (
+      <Container
+        maxWidth={false}
+        disableGutters={true}
+        className={classes.root}
+      >
+        <Grid container spacing={0} className={classes.mobile}>
+          {
+            steps.map((step, index) => {
+              return (
+                <React.Fragment key={step.label}>
+                  <Headline
+                    text={`${index + 1}. ${step.label}`}
+                    classes={{
+                      text: classes.headlineText,
+                      root: classes.headlineRoot,
+                    }}
+                  />
+                  {step.content}
+                </React.Fragment>
+              );
+            })
+          }
+        </Grid>
+      </Container>
+    );
   } else {
     return (
       <Container
