@@ -134,7 +134,7 @@ function PTOCalculator(props) {
       content: (
         <Paper elevation={0} square>
           <Typography className={classes.text}>
-            As we brace for an economic downturn, now would be a good time to review your company PTO policy and the cashout option upon termination. Fill out the questionnaire below to understand how PTO is calculated.
+            As we brace for an economic downturn, now would be a good time to review your company PTO policy and the cashout option upon termination. Fill out the questionnaire below to calcualte your PTO balance.
           </Typography>
           <br />
           <Typography className={classes.text}>
@@ -149,7 +149,7 @@ function PTOCalculator(props) {
         <Paper elevation={0} square>
           <Box className={classes.field}>
             <Typography variant="h6" className={classes.question}>
-              Does it use hours or days?
+              Does it accrue by hours or days?
             </Typography>
             <Paper elevation={0} square className={classes.answer}>
               <ToggleField
@@ -195,7 +195,7 @@ function PTOCalculator(props) {
           </Box>
           <Box className={classes.field}>
             <Typography variant="h6" className={classes.question}>
-              What is the cap?
+              What is the accrual cap?
             </Typography>
             <Paper elevation={0} square className={classes.answer}>
               <NumberField
