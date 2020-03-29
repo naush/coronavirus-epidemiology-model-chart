@@ -45,6 +45,17 @@ const theme = createMuiTheme({
   },
 });
 
+theme.overrides.MuiToggleButton = {
+  root: {
+    '&$selected': {
+      backgroundColor: theme.palette.senary.main,
+    },
+  },
+  label: {
+    width: theme.spacing(20),
+  },
+};
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
