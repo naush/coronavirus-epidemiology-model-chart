@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import InputAdornment from '@material-ui/core/InputAdornment';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -26,6 +28,8 @@ function NumberField(props) {
     changeHandler,
     min,
     max,
+    fullWidth,
+    unit,
   } = props;
 
   const formatChange = (e) => {
@@ -35,9 +39,11 @@ function NumberField(props) {
 
   return (
     <Fragment>
-      <Typography variant='body1' className={classes.label}>
-        {label}
-      </Typography>
+      {label && (
+        <Typography variant='body1' className={classes.label}>
+          {label}
+        </Typography>
+      )}
       <TextField
         type="number"
         defaultValue={value}
@@ -46,11 +52,14 @@ function NumberField(props) {
         className={classes.field}
         variant="outlined"
         size="small"
+        InputProps={{
+          endAdornment: unit === undefined ? null : <InputAdornment position="end">{unit}</InputAdornment>,
+        }}
         inputProps={{
           min: min || 0,
           max: max || Number.MAX_SAFE_INTEGER,
         }}
-        fullWidth
+        fullWidth={fullWidth === undefined ? true : fullWidth}
       />
     </Fragment>
   );

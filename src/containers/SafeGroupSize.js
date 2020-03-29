@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import NumberField from './../components/NumberField';
-import Instruction from './../components/Instruction';
+import Headline from './../components/Headline';
 import Link from '@material-ui/core/Link';
 
 import clsx from  'clsx';
@@ -88,8 +88,8 @@ function SafeGroupSize(props) {
     }
   }
 
-  const instruction = (
-    <Instruction
+  const headline = (
+    <Headline
       text={
         <React.Fragment>
           We define a safe group size as the minimum number of people in a gathering where there is at least a 95% chance you will not encounter someone with coronavirus. Find out what your safe group size is by choosing a metropolitan area, and use either the <Link target='_blank' href='https://coronavirus.jhu.edu/map.html'>Coronavirus Map by Johns Hopkins</Link> or the <Link href='/prediction_model'>Prediction Model</Link> to find the number of confirmed cases.
@@ -105,7 +105,7 @@ function SafeGroupSize(props) {
     >
       <Grid container spacing={0}>
         <Grid item sm={3} className={classes.item}>
-          {isMobile && instruction}
+          {isMobile && headline}
           <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
             <Typography variant='body1' className={classes.label}>
               Metropolitan Area
@@ -135,7 +135,7 @@ function SafeGroupSize(props) {
           </Paper>
         </Grid>
         <Grid item sm={9} className={classes.item}>
-          {!isMobile && instruction}
+          {!isMobile && headline}
           <Paper elevation={0} className={classes.paper}>
             <Box>
               <Typography variant="h6" className={classes.subtitle}>

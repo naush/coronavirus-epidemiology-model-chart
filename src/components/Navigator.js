@@ -42,6 +42,7 @@ function Navigator(props) {
         <MenuItem onClick={handleClose('/')}>Prediction Model</MenuItem>
         <MenuItem onClick={handleClose('/safe-group-size')}>Safe Group Size</MenuItem>
         <MenuItem onClick={handleClose('/emergency-food-guide')}>Emergency Food Guide</MenuItem>
+        <MenuItem onClick={handleClose('/pto-calculator')}>Paid Time Off</MenuItem>
         <MenuItem onClick={handleClose('/credits')}>Credits</MenuItem>
       </Menu>
     </React.Fragment>

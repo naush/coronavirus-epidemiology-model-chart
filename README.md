@@ -30,8 +30,29 @@ Launches the test runner in the interactive watch mode.<br>
 1. https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/
 1. https://stopcovid19.pichuchen.tw/en/
 1. https://covid19.tzeng17.com/
+1. https://covid19.fyi/#/
 1. https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series
 1. https://documenter.getpostman.com/view/1223095/SzS4S7kd?version=latest
+1. https://coronarwanda.com/
+1. https://covid-19.nchc.org.tw/
+
+## More
+
+1. Translation.
+1. Digital Archive. Posters and flyers. https://images.app.goo.gl/W18GM68Aj4RBsWWQ7.
+1. Self-Checker. https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html.
+1. Location tracker.
+1. Dashboard bookmarks.
+1. Elderly grocery delivery.
+1. Small restaurants delivery.
+1. Restaurant suppliers direct to consumer.
+1. Compose services.
+1. Provide or aggregate covid-19 information.
+1. Sell gift cards for local businesses.
+1. Offer 1:1 mentoring and project-based learning.
+1. Distributed/decentralized library. User catalogs owned books. Search nearby books. System for tracking borrow & return books. Goodreads integration. Amazon integration. Only friends are allowed to see location. Condition of books. Photos of books. Book fines. Pay your fines or you are not allowed to borrow more books.
+1. Schedule Zoom/virtual meetings. Provide custom backgrounds. Digital signage. For different occasions: business, romantic, family, workout, drinks.
+1. Better error handling.
 
 ## License
 

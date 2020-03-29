@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from  'clsx';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,17 +29,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Instruction(props) {
+function Headline(props) {
   const classes = useStyles();
-  const { text } = props;
+  const {
+    text,
+    textClass,
+  } = props;
 
   return (
     <Paper elevation={0} className={classes.root} square>
-      <Typography className={classes.text}>
+      <Typography className={clsx(classes.text, textClass)}>
         {text}
       </Typography>
     </Paper>
   );
 }
 
-export default Instruction;
+export default Headline;
