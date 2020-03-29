@@ -2,8 +2,6 @@ import React  from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { DatePicker } from '@material-ui/pickers';
-import startOfYear from 'date-fns/startOfYear'
-import endOfYear from 'date-fns/endOfYear'
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -23,6 +21,8 @@ import Headline from './../components/Headline';
 import NumberField from './../components/NumberField';
 import PTOChart from './../components/PTOChart';
 import clsx from  'clsx';
+import PTOEngine from 'pto-engine';
+import PTOState from '../lib/PTOState';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -67,38 +67,44 @@ const useStyles = makeStyles(theme => ({
 function PTOCalculator(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const now = new Date();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [options, setOptions] = React.useState({
-    unit: 'hour',
-    frequency: 'fortnightly',
-    amount: 4.62,
-    cap: 264,
-    reset: 'never',
-    from: startOfYear(now),
-    to: endOfYear(now),
-    start: 0,
-    used: 0,
-  });
+  const savedOptions = PTOState.load();
+  const [options, setOptions] = React.useState(savedOptions);
 
-  const handleToggleChange = (attribute) => (e, value) => {
-    setOptions({
+  const saveOptions = (attribute, value) => {
+    const newOptions = {
       ...options,
       [attribute]: value,
-    });
+    };
+    setOptions(newOptions);
+    PTOState.save(newOptions);
+  }
+
+  const handleToggleChange = (attribute) => (e, value) => {
+    saveOptions(attribute, value);
   }
 
   const handleChange = (attribute) => (value) => {
-    setOptions({
-      ...options,
-      [attribute]: value,
-    });
+    saveOptions(attribute, value);
+  }
+
+  const engineOptions = {
+    from: options.from,
+    to: options.to,
+    amount: options.amount,
+    period: options.frequency,
+    accrualDate: options.frequency === 'biweekly' ? 14 : 1,
+    cap: options.cap,
+  };
+
+  if (options.reset === 'annually') {
+    engineOptions.resetPeriod = 'annually';
+    engineOptions.resetDate = 1;
   }
 
   const data = {
     start: options.start,
-    accrued: 15,
+    accrued: PTOEngine.calculate(engineOptions),
     used: options.used,
     unit: options.unit,
   };
@@ -156,8 +162,11 @@ function PTOCalculator(props) {
                 <ToggleButton value="weekly">
                   Weekly
                 </ToggleButton>
-                <ToggleButton value="fortnightly">
-                  Fornightly
+                <ToggleButton value="biweekly">
+                  Biweekly
+                </ToggleButton>
+                <ToggleButton value="semimonthly">
+                  Semimonthly
                 </ToggleButton>
                 <ToggleButton value="monthly">
                   Monthly
@@ -294,14 +303,14 @@ function PTOCalculator(props) {
   ];
 
   const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
+    saveOptions('activeStep', options.activeStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    saveOptions('activeStep', options.activeStep - 1);
   };
 
-  const step = steps[activeStep];
+  const step = steps[options.activeStep];
 
   const headline = (
     <Headline
@@ -322,7 +331,7 @@ function PTOCalculator(props) {
         <Grid container spacing={0} className={classes.root}>
           <Grid item sm={3} className={classes.item}>
             <Paper elevation={0} className={clsx(classes.paper, classes.control)} square>
-              <Stepper activeStep={activeStep} orientation="vertical">
+              <Stepper activeStep={options.activeStep} orientation="vertical">
                 {
                   steps.map((step, index) => (
                     <Step key={step.label}>
@@ -341,7 +350,7 @@ function PTOCalculator(props) {
             </Paper>
             <Paper square elevation={0} className={classes.actions}>
               <Button
-                disabled={activeStep === 0}
+                disabled={options.activeStep === 0}
                 onClick={handleBack}
                 className={classes.button}
                 variant="outlined"
@@ -349,7 +358,7 @@ function PTOCalculator(props) {
                 Back
               </Button>
               <Button
-                disabled={activeStep === steps.length - 1}
+                disabled={options.activeStep === steps.length - 1}
                 color="primary"
                 onClick={handleNext}
                 className={classes.button}

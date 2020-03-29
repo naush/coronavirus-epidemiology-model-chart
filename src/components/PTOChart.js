@@ -47,7 +47,7 @@ function PTOChart(props) {
           </Paper>
           <Paper square elevation={0} className={classes.paper}>
             <Typography variant="h6" className={classes.figure}>
-              {data.start}
+              {data.start.toFixed(0)}
             </Typography>
           </Paper>
         </Box>
@@ -59,7 +59,7 @@ function PTOChart(props) {
           </Paper>
           <Paper square elevation={0} className={classes.paper}>
             <Typography variant="h6" className={classes.figure}>
-              {data.accrued}
+              {data.accrued.toFixed(0)}
             </Typography>
           </Paper>
         </Box>
@@ -73,7 +73,7 @@ function PTOChart(props) {
           </Paper>
           <Paper square elevation={0} className={classes.paper}>
             <Typography variant="h6" style={{color: 'red'}} className={classes.figure}>
-              {data.used}
+              {data.used.toFixed(0)}
             </Typography>
           </Paper>
         </Box>
@@ -85,7 +85,7 @@ function PTOChart(props) {
           </Paper>
           <Paper square elevation={0} className={classes.paper}>
             <Typography variant="h6" style={{color: 'green'}} className={classes.figure}>
-              {data.start + data.accrued - data.used}
+              {(data.start + data.accrued - data.used).toFixed(0)}
             </Typography>
           </Paper>
         </Box>
