@@ -134,7 +134,7 @@ function PTOCalculator(props) {
       content: (
         <Paper elevation={0} square>
           <Typography className={classes.text}>
-            As we brace for an economic downturn, now would be a good time to review your company PTO policy and the cashout option upon termination. Fill out the questionnaire below to calcualte your PTO balance.
+            As we brace for an economic downturn, now would be a good time to review your company PTO policy and the cashout option upon termination. Fill out the questionnaire below to calculate your PTO balance.
           </Typography>
           <br />
           <Typography className={classes.text}>
